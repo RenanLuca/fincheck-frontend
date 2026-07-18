@@ -4,7 +4,7 @@ import { Input } from "../../components/ui/Input";
 import { useLoginController } from "./useLoginController";
 
 export function Login() {
-  const { register, errors, handleSubmit } = useLoginController();
+  const { register, errors, handleSubmit, isLoading } = useLoginController();
 
   return (
     <AuthCard
@@ -27,7 +27,7 @@ export function Login() {
           {...register("password")}
         />
 
-        <Button type="submit">Entrar</Button>
+        <Button type="submit" isLoading={isLoading}>Entrar</Button>
       </form>
     </AuthCard>
   );

@@ -4,7 +4,7 @@ import { Input } from "../../components/ui/Input";
 import { useRegisterController } from "./useRegisterController";
 
 export function Register() {
-  const { register, errors, handleSubmit } = useRegisterController();
+  const { register, errors, handleSubmit, isLoading } = useRegisterController();
 
   return (
     <AuthCard
@@ -33,7 +33,7 @@ export function Register() {
           {...register("password")}
         />
 
-        <Button type="submit">Criar conta</Button>
+        <Button type="submit" isLoading={isLoading}>Criar conta</Button>
       </form>
     </AuthCard>
   );
