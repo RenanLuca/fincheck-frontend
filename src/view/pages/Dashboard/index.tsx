@@ -1,14 +1,18 @@
 import { useAuth } from "../../../app/hooks/useAuth";
-import { Button } from "../../components/ui/Button";
+import { Accounts } from "./components/Accounts";
+import { Transactions } from "./components/Transactions";
 
 export function Dashboard() {
   const { signOut } = useAuth();
 
   return (
-    <div>
-      <h1>Dashboard</h1>
-
-      <Button onClick={signOut}>Sair</Button>
-    </div>
+    <>
+      <div className="w-full md:w-1/2">
+        <Accounts/>
+      </div>
+      <div className="w-full md:w-1/2">
+        <Transactions />
+      </div>  
+    </>
   )
 }
