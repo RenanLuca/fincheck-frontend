@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { LocalStorageKeys } from "../config/localStorageKeys";
 import { UsersService } from "../services/usersService";
+import { LaunchScreen } from "../../view/components/shared/LaunchScreen";
 
 interface User {
   name: string;
@@ -24,24 +25,30 @@ interface AuthProviderProps {
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [signedIn, setSignedIn] = useState(
+  const [hasToken, setHasToken] = useState(
     () => !!localStorage.getItem(LocalStorageKeys.ACCESS_TOKEN),
   );
 
   function signIn(accessToken: string) {
     localStorage.setItem(LocalStorageKeys.ACCESS_TOKEN, accessToken);
-    setSignedIn(true);
+    setHasToken(true);
   }
 
   function signOut() {
     localStorage.removeItem(LocalStorageKeys.ACCESS_TOKEN);
-    setSignedIn(false);
+    setHasToken(false);
   }
 
-  const { data: user, isLoading: isLoadingUser, isError } = useQuery({
+  const {
+    data: user,
+    isLoading: isLoadingUser,
+    isSuccess,
+    isError,
+  } = useQuery({
     queryKey: ["users", "me"],
     queryFn: UsersService.me,
-    enabled: signedIn,
+    enabled: hasToken,
+    staleTime: 5000
   });
 
   useEffect(() => {
@@ -52,6 +59,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
       });
     }
   }, [isError]);
+
+  const signedIn = hasToken && isSuccess;
+
+  if (isLoadingUser) {
+    return <LaunchScreen />;
+  }
 
   return (
     <AuthContext.Provider value={{ signedIn, user, isLoadingUser, signIn, signOut }}>

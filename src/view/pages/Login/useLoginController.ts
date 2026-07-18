@@ -13,6 +13,10 @@ export function useLoginController() {
     formState: { errors },
   } = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "renan2@gmail.com",
+      password: "admin123"
+    }
   });
 
   const { signIn } = useAuth();
