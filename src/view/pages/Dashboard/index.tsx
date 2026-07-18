@@ -8,11 +8,11 @@ export function Dashboard() {
   return (
     <>
       <div className="w-full md:w-1/2">
-        <Accounts/>
+        <Accounts />
       </div>
       <div className="w-full md:w-1/2">
         <Transactions />
-      </div>  
+      </div>
     </>
-  )
+  );
 }

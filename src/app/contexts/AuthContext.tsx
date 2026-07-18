@@ -48,7 +48,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     queryKey: ["users", "me"],
     queryFn: UsersService.me,
     enabled: hasToken,
-    staleTime: 5000
+    staleTime: 5000,
   });
 
   useEffect(() => {

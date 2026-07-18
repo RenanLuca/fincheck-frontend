@@ -2,7 +2,7 @@ import type { ComponentProps } from "react";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { cn } from "../../../app/utils/cn";
 
-interface ButtonProps extends ComponentProps<'button'> {
+interface ButtonProps extends ComponentProps<"button"> {
   isLoading?: boolean;
 }
 

@@ -15,8 +15,8 @@ export function useLoginController() {
     resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "renan2@gmail.com",
-      password: "admin123"
-    }
+      password: "admin123",
+    },
   });
 
   const { signIn } = useAuth();

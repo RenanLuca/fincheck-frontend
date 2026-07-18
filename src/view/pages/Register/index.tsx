@@ -14,18 +14,8 @@ export function Register() {
       linkTo="/login"
     >
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-        <Input
-          type="text"
-          label="Nome"
-          error={errors.name?.message}
-          {...register("name")}
-        />
-        <Input
-          type="email"
-          label="E-mail"
-          error={errors.email?.message}
-          {...register("email")}
-        />
+        <Input type="text" label="Nome" error={errors.name?.message} {...register("name")} />
+        <Input type="email" label="E-mail" error={errors.email?.message} {...register("email")} />
         <Input
           type="password"
           label="Senha"
@@ -33,7 +23,9 @@ export function Register() {
           {...register("password")}
         />
 
-        <Button type="submit" isLoading={isLoading}>Criar conta</Button>
+        <Button type="submit" isLoading={isLoading}>
+          Criar conta
+        </Button>
       </form>
     </AuthCard>
   );

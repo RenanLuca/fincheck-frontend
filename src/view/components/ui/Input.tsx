@@ -1,8 +1,8 @@
-import { forwardRef, useId, type ComponentProps, } from "react";
-import { CrossCircledIcon } from "@radix-ui/react-icons"
+import { forwardRef, useId, type ComponentProps } from "react";
+import { CrossCircledIcon } from "@radix-ui/react-icons";
 import { cn } from "../../../app/utils/cn";
 
-interface InputProps extends ComponentProps<'input'> {
+interface InputProps extends ComponentProps<"input"> {
   label: string;
   error?: string;
 }
@@ -40,8 +40,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             <CrossCircledIcon />
             <p className="text-xs">{error}</p>
           </div>
-        )
-        }
+        )}
       </div>
     );
   },
