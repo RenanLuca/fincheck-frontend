@@ -4,7 +4,10 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useAuth } from "../../../app/hooks/useAuth";
 import { AuthService } from "../../../app/services/authService";
-import { loginSchema, type LoginSchema } from "../../../app/schemas/loginSchema";
+import {
+  loginSchema,
+  type LoginSchema,
+} from "../../../app/schemas/loginSchema";
 
 export function useLoginController() {
   const {

@@ -4,7 +4,10 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useAuth } from "../../../app/hooks/useAuth";
 import { AuthService } from "../../../app/services/authService";
-import { registerSchema, type RegisterSchema } from "../../../app/schemas/registerSchema";
+import {
+  registerSchema,
+  type RegisterSchema,
+} from "../../../app/schemas/registerSchema";
 
 export function useRegisterController() {
   const {

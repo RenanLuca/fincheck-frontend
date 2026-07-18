@@ -1,6 +1,7 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { EyeIcon } from "../../../components/icons/EyeIcon";
 import { AccountCard } from "./AccountCard";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 export function Accounts() {
   return (
@@ -8,7 +9,9 @@ export function Accounts() {
       <div>
         <span className="text-white block">Saldo Total</span>
         <div className="flex items-center gap-2">
-          <strong className="text-2xl tracking-[-1px] text-white">R$ 1000,00</strong>
+          <strong className="text-2xl tracking-[-1px] text-white">
+            R$ 1000,00
+          </strong>
 
           <button className="w-8 h-8 flex items-center justify-center cursor-pointer">
             <EyeIcon open />
@@ -27,8 +30,27 @@ export function Accounts() {
             </button>
           </div>
         </div>
-        <div className="mt-4 w-full">
-          <AccountCard />
+        <div className="mt-4 w-full flex ">
+          <Swiper>
+            <AccountCard
+              balance={11123.23}
+              color="#333"
+              name="Nubank"
+              type="CASH"
+            />
+            <AccountCard
+              balance={11123.23}
+              color="#333"
+              name="Nubank"
+              type="CASH"
+            />
+            <AccountCard
+              balance={11123.23}
+              color="#333"
+              name="Nubank"
+              type="CASH"
+            />
+          </Swiper>
         </div>
       </div>
     </div>
