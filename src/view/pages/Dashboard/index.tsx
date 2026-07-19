@@ -1,10 +1,8 @@
 import { useAuth } from "../../../app/hooks/useAuth";
-import { Accounts } from "./components/Accounts";
-import { Transactions } from "./components/Transactions";
+import { Accounts } from "./components/Accounts/Accounts";
+import { Transactions } from "./components/Transactions/Transactions";
 
 export function Dashboard() {
-  const { signOut } = useAuth();
-
   return (
     <>
       <div className="w-full md:w-1/2">
