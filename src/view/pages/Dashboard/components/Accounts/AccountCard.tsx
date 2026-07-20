@@ -2,7 +2,7 @@ import { formatCurrency } from "../../../../../app/utils/formatCurrency";
 import { cn } from "../../../../../app/utils/cn";
 import { BankAccountTypeIcon } from "../../../../components/icons/BankAccountTypeIcon";
 import type { iconsMap } from "../../../../components/icons/BankAccountTypeIcon/iconsMap";
-import { useDashboard } from "../useDashboard";
+import { useDashboard } from "../DashboardContext/useDashboard";
 interface AccountCardProps {
   color: string;
   name: string;

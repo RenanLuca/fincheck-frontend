@@ -1,6 +1,6 @@
 import { Accounts } from "./components/Accounts/Accounts";
 import { Transactions } from "./components/Transactions/Transactions";
-import { DashboardProvider } from "./components/DashboardContext";
+import { DashboardProvider } from "./components/DashboardContext/DashboardContext";
 import { Fab } from "./components/Fab";
 
 export function Dashboard() {

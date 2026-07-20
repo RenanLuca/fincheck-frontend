@@ -1,7 +1,7 @@
 import { formatCurrency } from "../../../../../app/utils/formatCurrency";
 import { cn } from "../../../../../app/utils/cn";
 import { CategoryIcon } from "../../../../components/icons/categories/CategoryIcon";
-import { useDashboard } from "../useDashboard";
+import { useDashboard } from "../DashboardContext/useDashboard";
 
 interface TransactionItemProps {
   name: string;

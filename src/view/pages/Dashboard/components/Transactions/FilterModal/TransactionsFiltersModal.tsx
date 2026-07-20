@@ -56,7 +56,7 @@ export function TransactionsFiltersModal({
 
         <div>
           <span className="text-sm font-bold text-gray-800">Ano</span>
-          <div className="mt-2 flex items-center justify-between">
+          <div className="mt-2 flex w-fit items-center gap-3">
             <button
               onClick={goToPreviousYear}
               className="cursor-pointer rounded-full p-2 transition-colors hover:bg-gray-100"

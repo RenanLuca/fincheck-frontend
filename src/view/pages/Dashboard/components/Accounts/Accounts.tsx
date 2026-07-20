@@ -8,7 +8,7 @@ import { useAccountsController } from "./useAccountsController";
 import { useWindowWidth } from "../../../../../app/hooks/useWindowWidth";
 import { formatCurrency } from "../../../../../app/utils/formatCurrency";
 import { cn } from "../../../../../app/utils/cn";
-import { useDashboard } from "../useDashboard";
+import { useDashboard } from "../DashboardContext/useDashboard";
 import { Spinner } from "../../../../components/ui/Spinner";
 
 export function Accounts() {
