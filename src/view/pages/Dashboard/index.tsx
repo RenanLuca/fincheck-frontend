@@ -2,6 +2,7 @@ import { Accounts } from "./components/Accounts/Accounts";
 import { Transactions } from "./components/Transactions/Transactions";
 import { DashboardProvider } from "./components/DashboardContext/DashboardContext";
 import { Fab } from "./components/Fab";
+import { DashboardModals } from "./components/DashboardModals";
 
 export function Dashboard() {
   return (
@@ -13,6 +14,7 @@ export function Dashboard() {
         <Transactions />
       </div>
       <Fab />
+      <DashboardModals />
     </DashboardProvider>
   );
 }

@@ -9,15 +9,17 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../../../components/ui/DropdownMenu";
-
-const OPTIONS = [
-  { label: "Nova Despesa", Icon: Expense },
-  { label: "Nova Receita", Icon: Income },
-  { label: "Nova Conta", Icon: BankAccountIcon },
-];
+import { useDashboard } from "./DashboardContext/useDashboard";
 
 export function Fab() {
   const [isOpen, setIsOpen] = useState(false);
+  const { openNewAccountModal } = useDashboard();
+
+  const options = [
+    { label: "Nova Despesa", Icon: Expense, onClick: () => {} },
+    { label: "Nova Receita", Icon: Income, onClick: () => {} },
+    { label: "Nova Conta", Icon: BankAccountIcon, onClick: openNewAccountModal },
+  ];
 
   return (
     <div className="fixed bottom-4 right-4">
@@ -33,8 +35,8 @@ export function Fab() {
         </DropdownMenuTrigger>
 
         <DropdownMenuContent side="top" align="end" className="w-56">
-          {OPTIONS.map(({ label, Icon }) => (
-            <DropdownMenuItem key={label} className="gap-3">
+          {options.map(({ label, Icon, onClick }) => (
+            <DropdownMenuItem key={label} className="gap-3" onSelect={onClick}>
               <Icon />
               {label}
             </DropdownMenuItem>

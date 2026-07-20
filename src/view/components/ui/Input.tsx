@@ -29,7 +29,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
           <label
             htmlFor={inputId}
-            className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 transition-all peer-focus:top-3 peer-focus:translate-y-0 peer-focus:text-xs peer-not-placeholder-shown:top-3 peer-not-placeholder-shown:translate-y-0 peer-not-placeholder-shown:text-xs"
+            className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gray-700 transition-all peer-focus:top-3 peer-focus:translate-y-0 peer-focus:text-xs peer-not-placeholder-shown:top-3 peer-not-placeholder-shown:translate-y-0 peer-not-placeholder-shown:text-xs"
           >
             {label}
           </label>

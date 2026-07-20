@@ -15,7 +15,8 @@ export function Accounts() {
   const { sliderState, setSliderState, isLoading, accounts } =
     useAccountsController();
   const windowWidth = useWindowWidth();
-  const { areValuesVisible, toggleValuesVisibility } = useDashboard();
+  const { areValuesVisible, toggleValuesVisibility, openNewAccountModal } =
+    useDashboard();
 
   return (
     <div className="bg-teal-900 rounded-2xl w-full justify-between h-full flex flex-col px-4 py-8 md:p-10">
@@ -51,7 +52,10 @@ export function Accounts() {
               <strong className="text-white text-lg block mb-4">
                 Minhas Contas
               </strong>
-              <div className="h-50 flex items-center justify-center rounded-2xl border border-dashed border-white/90">
+              <button
+                onClick={openNewAccountModal}
+                className="h-50 flex w-full cursor-pointer items-center justify-center rounded-2xl border border-dashed border-white/90"
+              >
                 <div className="flex flex-col items-center gap-4">
                   <div className="w-12 h-12 rounded-full border border-dashed border-white flex items-center justify-center">
                     <PlusIcon className="text-white w-6 h-6" />
@@ -62,7 +66,7 @@ export function Accounts() {
                     nova conta
                   </span>
                 </div>
-              </div>
+              </button>
             </div>
           ) : (
             <div className="flex-1 flex flex-col justify-end mt-10 md:mt-0">
