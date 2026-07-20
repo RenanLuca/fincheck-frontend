@@ -9,7 +9,7 @@ export function MainLayout() {
         <Logo className="h-6 text-teal-900" />
         <UserMenu />
       </header>
-      <main className="flex-1 flex flex-col md:flex-row w-full gap-4">
+      <main className="flex-1 flex flex-col md:flex-row w-full gap-4 max-h-full">
         <Outlet />
       </main>
     </div>

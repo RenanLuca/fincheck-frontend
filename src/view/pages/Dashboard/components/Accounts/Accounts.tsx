@@ -5,22 +5,34 @@ import "swiper/css";
 import { AccountsSliderNavigation } from "./AccountsSliderNavigation";
 import { useAccountsController } from "./useAccountsController";
 import { useWindowWidth } from "../../../../../app/hooks/useWindowWidth";
+import { formatCurrency } from "../../../../../app/utils/formatCurrency";
+import { cn } from "../../../../../app/utils/cn";
+import { useDashboard } from "../useDashboard";
 
 export function Accounts() {
   const { sliderState, setSliderState } = useAccountsController();
   const windowWidth = useWindowWidth();
+  const { areValuesVisible, toggleValuesVisibility } = useDashboard();
 
   return (
     <div className="bg-teal-900 rounded-2xl w-full h-full flex flex-col px-4 py-8 md:p-10">
       <div>
         <span className="text-white block">Saldo Total</span>
         <div className="flex items-center gap-2">
-          <strong className="text-2xl tracking-[-1px] text-white">
-            R$ 1000,00
+          <strong
+            className={cn(
+              "text-2xl tracking-[-1px] text-white",
+              !areValuesVisible && "blur-sm select-none",
+            )}
+          >
+            {formatCurrency(100000)}
           </strong>
 
-          <button className="w-8 h-8 flex items-center justify-center cursor-pointer">
-            <EyeIcon open />
+          <button
+            className="w-8 h-8 flex items-center justify-center cursor-pointer rounded-full transition-all hover:scale-110 hover:bg-white/10"
+            onClick={toggleValuesVisibility}
+          >
+            <EyeIcon open={areValuesVisible} />
           </button>
         </div>
       </div>

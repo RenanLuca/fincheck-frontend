@@ -6,13 +6,14 @@ import { MONTHS } from "../../../../../app/config/months";
 import { TransactionsSliderOption } from "./TransactionsSliderOption";
 import { TransactionsSliderNavigation } from "./TransactionsSliderNavigation";
 import { useTransactionsController } from "./useTransactionsController";
+import { TransactionItem } from "./TransactionItem";
 
 export function Transactions() {
   const { sliderState, setSliderState } = useTransactionsController();
 
   return (
-    <div className="bg-gray-100 rounded-2xl w-full h-full p-10">
-      <header className="">
+    <div className="bg-gray-100 rounded-2xl w-full h-full p-10 flex flex-col">
+      <header>
         <div className="flex items-center justify-between">
           <button className="flex items-center gap-2">
             <TransactionsIcon />
@@ -62,7 +63,20 @@ export function Transactions() {
           </Swiper>
         </div>
       </header>
-      <div className="mt-4">Conteúdo</div>
+      <div className="mt-4 space-y-2 flex-1 overflow-y-auto">
+        <TransactionItem
+          name="Almoço"
+          date="14/06/2026"
+          value={1222}
+          categoryType="income"
+        />
+        <TransactionItem
+          name="Almoço"
+          date="14/06/2026"
+          value={1222}
+          categoryType="income"
+        />
+      </div>
     </div>
   );
 }
