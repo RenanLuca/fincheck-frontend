@@ -6,6 +6,7 @@ import { TransactionsSliderOption } from "./TransactionsSliderOption";
 import { TransactionsSliderNavigation } from "./TransactionsSliderNavigation";
 import { useTransactionsController } from "./useTransactionsController";
 import { TransactionItem } from "./TransactionItem";
+import { TransactionsFiltersModal } from "./FilterModal/TransactionsFiltersModal";
 import { Spinner } from "../../../../components/ui/Spinner";
 import emptyStateImg from "../../../../../assets/empty-state.svg";
 
@@ -16,6 +17,9 @@ export function Transactions() {
     initialLoading,
     isLoading,
     transactions,
+    isFiltersModalOpen,
+    setIsFiltersModalOpen,
+    handleApplyFilters,
   } = useTransactionsController();
 
   return (
@@ -29,7 +33,10 @@ export function Transactions() {
           <header>
             <div className="flex items-center justify-between">
               <TransactionsTypeDropdown />
-              <button>
+              <button
+                onClick={() => setIsFiltersModalOpen(true)}
+                className="cursor-pointer"
+              >
                 <FilterIcon />
               </button>
             </div>
@@ -95,6 +102,12 @@ export function Transactions() {
               ))}
             </div>
           )}
+
+          <TransactionsFiltersModal
+            open={isFiltersModalOpen}
+            onOpenChange={setIsFiltersModalOpen}
+            onApplyFilters={handleApplyFilters}
+          />
         </>
       )}
     </div>
