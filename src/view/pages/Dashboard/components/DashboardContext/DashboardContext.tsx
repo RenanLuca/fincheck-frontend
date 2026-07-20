@@ -1,11 +1,16 @@
 import { createContext, useState, type ReactNode } from "react";
 
+type TransactionType = "INCOME" | "EXPENSE";
+
 interface DashboardContextValues {
   areValuesVisible: boolean;
   toggleValuesVisibility: () => void;
   isNewAccountModalOpen: boolean;
   openNewAccountModal: () => void;
   closeNewAccountModal: () => void;
+  transactionModalType: TransactionType | null;
+  openTransactionModal: (type: TransactionType) => void;
+  closeTransactionModal: () => void;
 }
 
 export const DashboardContext = createContext({} as DashboardContextValues);
@@ -17,6 +22,8 @@ interface DashboardProviderProps {
 export function DashboardProvider({ children }: DashboardProviderProps) {
   const [areValuesVisible, setAreValuesVisible] = useState(true);
   const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState(false);
+  const [transactionModalType, setTransactionModalType] =
+    useState<TransactionType | null>(null);
 
   function toggleValuesVisibility() {
     setAreValuesVisible((prev) => !prev);
@@ -30,6 +37,14 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
     setIsNewAccountModalOpen(false);
   }
 
+  function openTransactionModal(type: TransactionType) {
+    setTransactionModalType(type);
+  }
+
+  function closeTransactionModal() {
+    setTransactionModalType(null);
+  }
+
   return (
     <DashboardContext.Provider
       value={{
@@ -38,6 +53,9 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
         isNewAccountModalOpen,
         openNewAccountModal,
         closeNewAccountModal,
+        transactionModalType,
+        openTransactionModal,
+        closeTransactionModal,
       }}
     >
       {children}

@@ -1,16 +1,5 @@
 import { useState } from "react";
-
-interface Account {
-  id: string;
-  name: string;
-}
-
-// TODO: substituir por uma busca em GET /bank-accounts quando integrarmos a API
-const MOCKED_ACCOUNTS: Account[] = [
-  { id: "1", name: "XP Investimentos" },
-  { id: "2", name: "Nubank" },
-  { id: "3", name: "Carteira" },
-];
+import { ACCOUNTS } from "../../../../../../app/config/accounts";
 
 export interface TransactionsFilters {
   bankAccountId: string | null;
@@ -46,7 +35,7 @@ export function useTransactionsFiltersController({
   }
 
   return {
-    accounts: MOCKED_ACCOUNTS,
+    accounts: ACCOUNTS,
     selectedAccountId,
     selectAccount,
     year,

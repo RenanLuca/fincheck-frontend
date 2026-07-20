@@ -1,5 +1,5 @@
 import * as RadixSelect from "@radix-ui/react-select";
-import { CheckIcon, ChevronDownIcon } from "@radix-ui/react-icons";
+import { ChevronDownIcon } from "@radix-ui/react-icons";
 import { useId } from "react";
 import { cn } from "../../../app/utils/cn";
 
@@ -23,11 +23,11 @@ export function Select({ label, value, onValueChange, options }: SelectProps) {
       <RadixSelect.Root value={value} onValueChange={onValueChange}>
         <RadixSelect.Trigger
           id={id}
-          className="flex h-15 w-full cursor-pointer items-center justify-between rounded-lg border border-gray-500 bg-white px-4 pt-4 text-left text-gray-800 outline-none transition-colors data-[state=open]:border-gray-800"
+          className="peer relative flex h-15 w-full cursor-pointer items-center rounded-lg border border-gray-500 bg-white px-4 pt-4 text-left text-gray-800 outline-none transition-colors data-[state=open]:border-gray-800"
         >
           <RadixSelect.Value placeholder=" " />
-          <RadixSelect.Icon>
-            <ChevronDownIcon className="text-gray-600" />
+          <RadixSelect.Icon className="absolute right-4 top-1/2 -translate-y-1/2">
+            <ChevronDownIcon className="h-4 w-4 text-gray-800" />
           </RadixSelect.Icon>
         </RadixSelect.Trigger>
 
@@ -42,12 +42,9 @@ export function Select({ label, value, onValueChange, options }: SelectProps) {
                 <RadixSelect.Item
                   key={option.value}
                   value={option.value}
-                  className="flex cursor-pointer select-none items-center justify-between rounded-lg px-3 py-2 text-sm font-medium text-gray-800 outline-none data-[highlighted]:bg-gray-100"
+                  className="flex cursor-pointer select-none items-center justify-between rounded-lg px-3 py-2 text-sm font-medium text-gray-800 outline-none data-highlighted:bg-gray-100 "
                 >
                   <RadixSelect.ItemText>{option.label}</RadixSelect.ItemText>
-                  <RadixSelect.ItemIndicator>
-                    <CheckIcon />
-                  </RadixSelect.ItemIndicator>
                 </RadixSelect.Item>
               ))}
             </RadixSelect.Viewport>
@@ -58,7 +55,7 @@ export function Select({ label, value, onValueChange, options }: SelectProps) {
       <label
         htmlFor={id}
         className={cn(
-          "pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gray-700 transition-all",
+          "pointer-events-none text-sm absolute left-4 top-1/2 -translate-y-1/2 text-gray-700 transition-all peer-data-[state=open]:top-3 peer-data-[state=open]:translate-y-0 peer-data-[state=open]:text-xs",
           value && "top-3 translate-y-0 text-xs",
         )}
       >

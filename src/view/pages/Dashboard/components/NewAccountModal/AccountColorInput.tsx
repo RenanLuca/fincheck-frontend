@@ -29,13 +29,13 @@ export function AccountColorInput({
         <DropdownMenuTrigger asChild>
           <button
             id={id}
-            className="peer flex h-15 w-full p-4 text-xs text-gray-700 cursor-pointer items-center justify-between rounded-lg border border-gray-500 bg-white outline-none transition-colors data-[state=open]:border-gray-800"
+            className="peer flex h-15 w-full p-4 text-sm text-gray-700 cursor-pointer items-center justify-between rounded-lg border border-gray-500 bg-white outline-none transition-colors data-[state=open]:border-gray-800"
           >
             Cor
             {value ? (
               <ColorIcon bg={value.bg} color={value.color} />
             ) : (
-              <ChevronDownIcon className="text-gray-600" />
+              <ChevronDownIcon className="text-gray-800 w-4 h-4" />
             )}
           </button>
         </DropdownMenuTrigger>
