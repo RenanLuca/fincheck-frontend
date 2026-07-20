@@ -1,6 +1,7 @@
 import { Accounts } from "./components/Accounts/Accounts";
 import { Transactions } from "./components/Transactions/Transactions";
 import { DashboardProvider } from "./components/DashboardContext";
+import { Fab } from "./components/Fab";
 
 export function Dashboard() {
   return (
@@ -11,6 +12,7 @@ export function Dashboard() {
       <div className="w-full md:w-1/2">
         <Transactions />
       </div>
+      <Fab />
     </DashboardProvider>
   );
 }
