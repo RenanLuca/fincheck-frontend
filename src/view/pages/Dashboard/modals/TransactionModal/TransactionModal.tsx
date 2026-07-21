@@ -31,8 +31,12 @@ export function TransactionModal({
     categories,
     accounts,
     isSaveButtonDisabled,
+    isLoading,
     handleSubmit,
-  } = useTransactionModalController({ type });
+  } = useTransactionModalController({
+    type,
+    onSuccess: () => onOpenChange(false),
+  });
 
   const isExpense = type === "EXPENSE";
   const title = isExpense ? "Nova Despesa" : "Nova Receita";
@@ -86,6 +90,7 @@ export function TransactionModal({
         <Button
           onClick={handleSubmit}
           disabled={isSaveButtonDisabled}
+          isLoading={isLoading}
         >
           Salvar
         </Button>

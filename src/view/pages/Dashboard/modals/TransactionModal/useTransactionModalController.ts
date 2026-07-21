@@ -1,13 +1,18 @@
 import { useState } from "react";
-import { CATEGORIES } from "../../../../../app/config/categories";
-import { ACCOUNTS } from "../../../../../app/config/accounts";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import { useBankAccounts, BANK_ACCOUNTS_QUERY_KEY } from "../../../../../app/hooks/useBankAccounts";
+import { useCategories } from "../../../../../app/hooks/useCategories";
+import { TransactionsService } from "../../../../../app/services/transactionsService";
 
 interface UseTransactionModalControllerParams {
   type: "INCOME" | "EXPENSE";
+  onSuccess: () => void;
 }
 
 export function useTransactionModalController({
   type,
+  onSuccess,
 }: UseTransactionModalControllerParams) {
   const [name, setName] = useState("");
   const [value, setValue] = useState<number | undefined>(
@@ -19,24 +24,54 @@ export function useTransactionModalController({
     new Date(),
   );
 
-  const categories = CATEGORIES.filter(
+  const { data: allCategories = [] } = useCategories();
+  const { data: accounts = [] } = useBankAccounts();
+
+  const categories = allCategories.filter(
     (category) => category.type === type,
   );
-  const accounts = ACCOUNTS;
+
+  const queryClient = useQueryClient();
+
+  const { mutateAsync: createTransaction, isPending: isLoading } =
+    useMutation({
+      mutationFn: TransactionsService.create,
+    });
 
   const isSaveButtonDisabled =
     !name || !value || !bankAccountId || !date;
 
-  function handleSubmit() {
-    // TODO: enviar para a API (POST /transactions) quando integrarmos
-    console.log({
-      name,
-      value,
-      type,
-      categoryId: categoryId || undefined,
-      bankAccountId,
-      date: date?.toISOString(),
-    });
+  async function handleSubmit() {
+    if (!value || !date) {
+      return;
+    }
+
+    try {
+      await createTransaction({
+        name,
+        value,
+        date: date.toISOString(),
+        type,
+        bankAccountId,
+        categoryId: categoryId || undefined,
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: BANK_ACCOUNTS_QUERY_KEY,
+      });
+      toast.success(
+        type === "EXPENSE"
+          ? "Despesa criada com sucesso!"
+          : "Receita criada com sucesso!",
+      );
+      onSuccess();
+    } catch {
+      toast.error(
+        type === "EXPENSE"
+          ? "Não foi possível criar a despesa!"
+          : "Não foi possível criar a receita!",
+      );
+    }
   }
 
   return {
@@ -53,6 +88,7 @@ export function useTransactionModalController({
     categories,
     accounts,
     isSaveButtonDisabled,
+    isLoading,
     handleSubmit,
   };
 }

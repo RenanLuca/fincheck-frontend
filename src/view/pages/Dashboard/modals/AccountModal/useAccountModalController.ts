@@ -11,6 +11,7 @@ import {
   type NewAccountSchema,
 } from "../../../../../app/schemas/newAccount";
 import { BankAccountService } from "../../../../../app/services/bankAccountService";
+import { BANK_ACCOUNTS_QUERY_KEY } from "../../../../../app/hooks/useBankAccounts";
 import type { BankAccount } from "../../../../../app/entities/BankAccount";
 
 interface UseAccountModalControllerParams {
@@ -80,7 +81,7 @@ export function useAccountModalController({
 
     try {
       await removeAccount(account.id);
-      queryClient.invalidateQueries({ queryKey: ["bank-accounts"] });
+      queryClient.invalidateQueries({ queryKey: BANK_ACCOUNTS_QUERY_KEY });
       toast.success("Conta excluída com sucesso!");
       setIsConfirmingDelete(false);
       onSuccess();
@@ -101,7 +102,7 @@ export function useAccountModalController({
         }
 
         queryClient.invalidateQueries({
-          queryKey: ["bank-accounts"],
+          queryKey: BANK_ACCOUNTS_QUERY_KEY,
         });
         onSuccess();
         reset();

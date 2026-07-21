@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { BankAccountService } from "../../../../../app/services/bankAccountService";
+import { useBankAccounts } from "../../../../../app/hooks/useBankAccounts";
 
 export function useAccountsController() {
   const [sliderState, setSliderState] = useState({
@@ -8,10 +7,7 @@ export function useAccountsController() {
     isEnd: false,
   });
 
-  const { data: accounts = [], isLoading } = useQuery({
-    queryKey: ["bank-accounts"],
-    queryFn: BankAccountService.findAll,
-  });
+  const { data: accounts = [], isLoading } = useBankAccounts();
 
   const currentBalance = useMemo(
     () =>
