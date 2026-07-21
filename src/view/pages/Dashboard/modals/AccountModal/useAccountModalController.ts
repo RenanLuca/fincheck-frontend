@@ -3,6 +3,7 @@ import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import {
@@ -22,6 +23,8 @@ export function useAccountModalController({
   onSuccess,
 }: UseAccountModalControllerParams) {
   const isEditing = !!account;
+
+  const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
 
   const {
     register,
@@ -57,6 +60,35 @@ export function useAccountModalController({
     mutationFn: BankAccountService.update,
   });
 
+  const { mutateAsync: removeAccount, isPending: isDeleting } = useMutation({
+    mutationFn: BankAccountService.remove,
+  });
+
+  function openDeleteConfirmation() {
+    setIsConfirmingDelete(true);
+  }
+
+  function cancelDeleteConfirmation() {
+    setIsConfirmingDelete(false);
+    onSuccess();
+  }
+
+  async function handleConfirmDelete() {
+    if (!account) {
+      return;
+    }
+
+    try {
+      await removeAccount(account.id);
+      queryClient.invalidateQueries({ queryKey: ["bank-accounts"] });
+      toast.success("Conta excluída com sucesso!");
+      setIsConfirmingDelete(false);
+      onSuccess();
+    } catch {
+      toast.error("Não foi possível excluir a conta!");
+    }
+  }
+
   const handleSubmit = hookFormHandleSubmit(
     async (data) => {
       try {
@@ -90,5 +122,10 @@ export function useAccountModalController({
     handleSubmit,
     isLoading: isCreating || isUpdating,
     isEditing,
+    isConfirmingDelete,
+    openDeleteConfirmation,
+    cancelDeleteConfirmation,
+    handleConfirmDelete,
+    isDeleting,
   };
 }
