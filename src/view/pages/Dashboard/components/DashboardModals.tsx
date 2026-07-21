@@ -6,7 +6,7 @@ export function DashboardModals() {
   const {
     accountModalState,
     closeAccountModal,
-    transactionModalType,
+    transactionModalState,
     closeTransactionModal,
   } = useDashboard();
 
@@ -23,17 +23,21 @@ export function DashboardModals() {
         }}
       />
 
-      {transactionModalType && (
-        <TransactionModal
-          open
-          type={transactionModalType}
-          onOpenChange={(open) => {
-            if (!open) {
-              closeTransactionModal();
-            }
-          }}
-        />
-      )}
+      <TransactionModal
+        key={
+          transactionModalState.transaction?.id ??
+          transactionModalState.type ??
+          "new"
+        }
+        open={transactionModalState.open}
+        type={transactionModalState.type ?? undefined}
+        transaction={transactionModalState.transaction}
+        onOpenChange={(open) => {
+          if (!open) {
+            closeTransactionModal();
+          }
+        }}
+      />
     </>
   );
 }

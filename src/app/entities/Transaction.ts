@@ -6,6 +6,7 @@ export interface Transaction {
   date: string;
   value: number;
   type: "INCOME" | "EXPENSE";
+  bankAccountId: string;
   category: Category | null;
 }
 

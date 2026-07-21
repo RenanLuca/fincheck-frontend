@@ -1,6 +1,6 @@
 import { httpClient } from "../httpClient";
 
-interface TransactionParams {
+export interface TransactionParams {
   name: string;
   value: number;
   date: string;

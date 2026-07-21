@@ -1,5 +1,6 @@
 import { createContext, useState, type ReactNode } from "react";
 import type { BankAccount } from "../../../../../app/entities/BankAccount";
+import type { Transaction } from "../../../../../app/entities/Transaction";
 
 type TransactionType = "INCOME" | "EXPENSE";
 
@@ -8,14 +9,24 @@ interface AccountModalState {
   account: BankAccount | null;
 }
 
+interface TransactionModalState {
+  open: boolean;
+  type: TransactionType | null;
+  transaction: Transaction | null;
+}
+
+type OpenTransactionModalParams =
+  | { type: TransactionType }
+  | { transaction: Transaction };
+
 interface DashboardContextValues {
   areValuesVisible: boolean;
   toggleValuesVisibility: () => void;
   accountModalState: AccountModalState;
   openAccountModal: (account?: BankAccount) => void;
   closeAccountModal: () => void;
-  transactionModalType: TransactionType | null;
-  openTransactionModal: (type: TransactionType) => void;
+  transactionModalState: TransactionModalState;
+  openTransactionModal: (params: OpenTransactionModalParams) => void;
   closeTransactionModal: () => void;
 }
 
@@ -29,8 +40,12 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
   const [areValuesVisible, setAreValuesVisible] = useState(true);
   const [accountModalState, setAccountModalState] =
     useState<AccountModalState>({ open: false, account: null });
-  const [transactionModalType, setTransactionModalType] =
-    useState<TransactionType | null>(null);
+  const [transactionModalState, setTransactionModalState] =
+    useState<TransactionModalState>({
+      open: false,
+      type: null,
+      transaction: null,
+    });
 
   function toggleValuesVisibility() {
     setAreValuesVisible((prev) => !prev);
@@ -44,12 +59,24 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
     setAccountModalState((prev) => ({ ...prev, open: false }));
   }
 
-  function openTransactionModal(type: TransactionType) {
-    setTransactionModalType(type);
+  function openTransactionModal(params: OpenTransactionModalParams) {
+    if ("transaction" in params) {
+      setTransactionModalState({
+        open: true,
+        type: params.transaction.type,
+        transaction: params.transaction,
+      });
+    } else {
+      setTransactionModalState({
+        open: true,
+        type: params.type,
+        transaction: null,
+      });
+    }
   }
 
   function closeTransactionModal() {
-    setTransactionModalType(null);
+    setTransactionModalState((prev) => ({ ...prev, open: false }));
   }
 
   return (
@@ -60,7 +87,7 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
         accountModalState,
         openAccountModal,
         closeAccountModal,
-        transactionModalType,
+        transactionModalState,
         openTransactionModal,
         closeTransactionModal,
       }}

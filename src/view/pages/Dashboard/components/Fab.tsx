@@ -23,12 +23,12 @@ export function Fab() {
     {
       label: "Nova Despesa",
       Icon: Expense,
-      onClick: () => openTransactionModal("EXPENSE"),
+      onClick: () => openTransactionModal({ type: "EXPENSE" }),
     },
     {
       label: "Nova Receita",
       Icon: Income,
-      onClick: () => openTransactionModal("INCOME"),
+      onClick: () => openTransactionModal({ type: "INCOME" }),
     },
     {
       label: "Nova Conta",

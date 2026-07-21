@@ -8,6 +8,7 @@ import { useTransactionsController } from "./useTransactionsController";
 import { TransactionItem } from "./TransactionItem";
 import { TransactionsFiltersModal } from "./FilterModal/TransactionsFiltersModal";
 import { Spinner } from "../../../../components/ui/Spinner";
+import { useDashboard } from "../DashboardContext/useDashboard";
 import emptyStateImg from "../../../../../assets/empty-state.svg";
 
 export function Transactions() {
@@ -22,6 +23,7 @@ export function Transactions() {
     filters,
     updateFilters,
   } = useTransactionsController();
+  const { openTransactionModal } = useDashboard();
 
   return (
     <div className="bg-gray-100 rounded-2xl w-full h-full p-10 flex flex-col">
@@ -111,6 +113,9 @@ export function Transactions() {
                   value={transaction.value}
                   type={transaction.type}
                   categoryIcon={transaction.category?.icon}
+                  onClick={() =>
+                    openTransactionModal({ transaction })
+                  }
                 />
               ))}
             </div>

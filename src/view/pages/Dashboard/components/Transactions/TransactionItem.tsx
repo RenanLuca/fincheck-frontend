@@ -10,6 +10,7 @@ interface TransactionItemProps {
   value: number;
   type: "INCOME" | "EXPENSE";
   categoryIcon?: string;
+  onClick?: () => void;
 }
 
 export function TransactionItem({
@@ -18,12 +19,16 @@ export function TransactionItem({
   value,
   type,
   categoryIcon,
+  onClick,
 }: TransactionItemProps) {
   const { areValuesVisible } = useDashboard();
   const isExpense = type === "EXPENSE";
 
   return (
-    <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
+    <button
+      onClick={onClick}
+      className="bg-white p-4 rounded-2xl flex w-full cursor-pointer items-center justify-between gap-4 text-left"
+    >
       <div className="flex-1 flex items-center gap-3">
         <CategoryIcon
           type={isExpense ? "expense" : "income"}
@@ -47,6 +52,6 @@ export function TransactionItem({
       >
         {isExpense ? "-" : "+"} {formatCurrency(value)}
       </span>
-    </div>
+    </button>
   );
 }

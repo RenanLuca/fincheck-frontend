@@ -8,14 +8,14 @@ import {
 } from "../ui/DropdownMenu";
 
 export function UserMenu() {
-  const { signOut } = useAuth();
+  const { signOut, user } = useAuth();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button className="bg-teal-50 rounded-full w-12 h-12 flex items-center justify-center border-teal-600 border cursor-pointer outline-none">
           <span className="text-sm tracking-[-0.5px] text-teal-900 font-medium select-none">
-            MA
+            {user?.name.slice(0, 2).toUpperCase()}
           </span>
         </button>
       </DropdownMenuTrigger>
