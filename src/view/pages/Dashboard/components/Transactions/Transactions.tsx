@@ -19,7 +19,8 @@ export function Transactions() {
     transactions,
     isFiltersModalOpen,
     setIsFiltersModalOpen,
-    handleApplyFilters,
+    filters,
+    updateFilters,
   } = useTransactionsController();
 
   return (
@@ -32,7 +33,12 @@ export function Transactions() {
         <>
           <header>
             <div className="flex items-center justify-between">
-              <TransactionsTypeDropdown />
+              <TransactionsTypeDropdown
+                value={filters.type}
+                onValueChange={(type) =>
+                  updateFilters({ type })
+                }
+              />
               <button
                 onClick={() => setIsFiltersModalOpen(true)}
                 className="cursor-pointer"
@@ -45,18 +51,20 @@ export function Transactions() {
                 slidesPerView={3}
                 centeredSlides
                 allowTouchMove={false}
+                initialSlide={filters.month}
                 onSwiper={(swiper) =>
                   setSliderState({
                     isBeginning: swiper.isBeginning,
                     isEnd: swiper.isEnd,
                   })
                 }
-                onSlideChange={(swiper) =>
+                onSlideChange={(swiper) => {
                   setSliderState({
                     isBeginning: swiper.isBeginning,
                     isEnd: swiper.isEnd,
-                  })
-                }
+                  });
+                  updateFilters({ month: swiper.activeIndex });
+                }}
               >
                 <TransactionsSliderNavigation
                   isBeginning={sliderState.isBeginning}
@@ -101,7 +109,8 @@ export function Transactions() {
                   name={transaction.name}
                   date={transaction.date}
                   value={transaction.value}
-                  categoryType={transaction.categoryType}
+                  type={transaction.type}
+                  categoryIcon={transaction.category?.icon}
                 />
               ))}
             </div>
@@ -110,7 +119,7 @@ export function Transactions() {
           <TransactionsFiltersModal
             open={isFiltersModalOpen}
             onOpenChange={setIsFiltersModalOpen}
-            onApplyFilters={handleApplyFilters}
+            onApplyFilters={updateFilters}
           />
         </>
       )}

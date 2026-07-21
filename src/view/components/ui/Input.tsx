@@ -38,7 +38,7 @@ export const Input = forwardRef<
         <label
           htmlFor={inputId}
           className={cn(
-            "pointer-events-none text-sm absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-700 peer-focus:top-2.5 peer-focus:translate-y-0 peer-focus:text-xs peer-not-placeholder-shown:top-2.5 peer-not-placeholder-shown:translate-y-0 peer-not-placeholder-shown:text-xs",
+            "pointer-events-none text-sm absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-700 peer-focus:top-1.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-not-placeholder-shown:top-1.5 peer-not-placeholder-shown:translate-y-0 peer-not-placeholder-shown:text-[11px]",
             hasMounted && "transition-all",
           )}
         >

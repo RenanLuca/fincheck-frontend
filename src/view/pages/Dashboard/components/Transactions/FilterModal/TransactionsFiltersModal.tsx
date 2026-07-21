@@ -5,15 +5,15 @@ import {
 import { Modal } from "../../../../../components/ui/Modal";
 import { Button } from "../../../../../components/ui/Button";
 import { cn } from "../../../../../../app/utils/cn";
-import {
-  useTransactionsFiltersController,
-  type TransactionsFilters,
-} from "./useTransactionsFiltersController";
+import { useTransactionsFiltersController } from "./useTransactionsFiltersController";
+import type { TransactionsFilters } from "../../../../../../app/entities/Transaction";
 
 interface TransactionsFiltersModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onApplyFilters: (filters: TransactionsFilters) => void;
+  onApplyFilters: (
+    filters: Partial<TransactionsFilters>,
+  ) => void;
 }
 
 export function TransactionsFiltersModal({

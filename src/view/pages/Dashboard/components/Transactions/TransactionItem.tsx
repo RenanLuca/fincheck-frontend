@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { formatCurrency } from "../../../../../app/utils/formatCurrency";
 import { cn } from "../../../../../app/utils/cn";
 import { CategoryIcon } from "../../../../components/icons/categories/CategoryIcon";
@@ -7,37 +8,44 @@ interface TransactionItemProps {
   name: string;
   date: string;
   value: number;
-  categoryType: "income" | "expense";
+  type: "INCOME" | "EXPENSE";
+  categoryIcon?: string;
 }
 
 export function TransactionItem({
   name,
   date,
   value,
-  categoryType,
+  type,
+  categoryIcon,
 }: TransactionItemProps) {
   const { areValuesVisible } = useDashboard();
+  const isExpense = type === "EXPENSE";
 
   return (
     <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
       <div className="flex-1 flex items-center gap-3">
-        <CategoryIcon type={categoryType} />
+        <CategoryIcon
+          type={isExpense ? "expense" : "income"}
+          category={categoryIcon}
+        />
         <div>
           <strong className="font-bold tracking-[-0.5px] block">
             {name}
           </strong>
           <span className="text-sm text-gray-600">
-            {date}
+            {format(new Date(date), "dd/MM/yyyy")}
           </span>
         </div>
       </div>
       <span
         className={cn(
-          "text-red-800 tracking-[-0.5px] font-medium",
+          "tracking-[-0.5px] font-medium",
+          isExpense ? "text-red-800" : "text-green-700",
           !areValuesVisible && "blur-sm select-none",
         )}
       >
-        - {formatCurrency(value)}
+        {isExpense ? "-" : "+"} {formatCurrency(value)}
       </span>
     </div>
   );

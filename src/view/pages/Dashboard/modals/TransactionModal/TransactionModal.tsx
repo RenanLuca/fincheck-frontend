@@ -1,3 +1,4 @@
+import { Controller } from "react-hook-form";
 import { Modal } from "../../../../components/ui/Modal";
 import { Input } from "../../../../components/ui/Input";
 import { Button } from "../../../../components/ui/Button";
@@ -18,19 +19,11 @@ export function TransactionModal({
   type,
 }: TransactionModalProps) {
   const {
-    name,
-    setName,
-    value,
-    setValue,
-    categoryId,
-    setCategoryId,
-    bankAccountId,
-    setBankAccountId,
-    date,
-    setDate,
+    register,
+    control,
+    errors,
     categories,
     accounts,
-    isSaveButtonDisabled,
     isLoading,
     handleSubmit,
   } = useTransactionModalController({
@@ -53,48 +46,76 @@ export function TransactionModal({
       onOpenChange={onOpenChange}
       title={title}
     >
-      <CurrencyInput
-        value={value}
-        onValueChange={(newValue) => setValue(newValue)}
-      />
-
-      <div className="mt-8 flex flex-col gap-4">
-        <Input
-          label={nameLabel}
-          value={name}
-          onChange={(event) => setName(event.target.value)}
+      <form onSubmit={handleSubmit}>
+        <Controller
+          name="value"
+          control={control}
+          render={({ field }) => (
+            <CurrencyInput
+              value={field.value}
+              onValueChange={field.onChange}
+              error={errors.value?.message}
+            />
+          )}
         />
 
-        <Select
-          label="Categoria"
-          value={categoryId}
-          onValueChange={setCategoryId}
-          options={categories.map((category) => ({
-            value: category.id,
-            label: category.name,
-          }))}
-        />
+        <div className="mt-8 flex flex-col gap-4">
+          <Input
+            label={nameLabel}
+            error={errors.name?.message}
+            {...register("name")}
+          />
 
-        <Select
-          label={accountLabel}
-          value={bankAccountId}
-          onValueChange={setBankAccountId}
-          options={accounts.map((account) => ({
-            value: account.id,
-            label: account.name,
-          }))}
-        />
+          <Controller
+            name="categoryId"
+            control={control}
+            render={({ field }) => (
+              <Select
+                label="Categoria"
+                value={field.value}
+                onValueChange={field.onChange}
+                options={categories.map((category) => ({
+                  value: category.id,
+                  label: category.name,
+                }))}
+              />
+            )}
+          />
 
-        <DateInput value={date} onValueChange={setDate} />
+          <Controller
+            name="bankAccountId"
+            control={control}
+            render={({ field }) => (
+              <Select
+                label={accountLabel}
+                value={field.value}
+                onValueChange={field.onChange}
+                options={accounts.map((account) => ({
+                  value: account.id,
+                  label: account.name,
+                }))}
+                error={errors.bankAccountId?.message}
+              />
+            )}
+          />
 
-        <Button
-          onClick={handleSubmit}
-          disabled={isSaveButtonDisabled}
-          isLoading={isLoading}
-        >
-          Salvar
-        </Button>
-      </div>
+          <Controller
+            name="date"
+            control={control}
+            render={({ field }) => (
+              <DateInput
+                value={field.value}
+                onValueChange={field.onChange}
+                error={errors.date?.message}
+              />
+            )}
+          />
+
+          <Button type="submit" isLoading={isLoading}>
+            Salvar
+          </Button>
+        </div>
+      </form>
     </Modal>
   );
 }

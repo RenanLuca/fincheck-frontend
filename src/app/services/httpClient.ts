@@ -16,7 +16,7 @@ httpClient.interceptors.request.use(async (config) => {
 
   if (import.meta.env.DEV) {
     await new Promise((resolve) =>
-      setTimeout(resolve, 3000),
+      setTimeout(resolve, 1500),
     );
   }
 

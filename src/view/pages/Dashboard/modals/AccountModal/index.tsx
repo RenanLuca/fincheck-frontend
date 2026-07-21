@@ -70,6 +70,7 @@ export function AccountModal({
                 <CurrencyInput
                   value={field.value}
                   onValueChange={field.onChange}
+                  error={errors.initialBalance?.message}
                 />
               )}
             />
@@ -92,6 +93,7 @@ export function AccountModal({
                 value={field.value}
                 onValueChange={field.onChange}
                 options={ACCOUNT_TYPE_OPTIONS}
+                error={errors.type?.message}
               />
             )}
           />
@@ -103,6 +105,7 @@ export function AccountModal({
               <AccountColorInput
                 value={field.value ?? null}
                 onValueChange={field.onChange}
+                error={errors.color?.message}
               />
             )}
           />

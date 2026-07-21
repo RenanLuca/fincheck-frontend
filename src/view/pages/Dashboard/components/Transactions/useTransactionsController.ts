@@ -1,57 +1,40 @@
-import { useEffect, useState } from "react";
-import type { TransactionsFilters } from "./FilterModal/useTransactionsFiltersController";
-
-interface Transaction {
-  id: string;
-  name: string;
-  date: string;
-  value: number;
-  categoryType: "income" | "expense";
-}
+import { useState } from "react";
+import { useTransactions } from "../../../../../app/hooks/useTransactions";
+import type { TransactionsFilters } from "../../../../../app/entities/Transaction";
 
 export function useTransactionsController() {
   const [sliderState, setSliderState] = useState({
     isBeginning: true,
     isEnd: false,
   });
-  const [initialLoading, setInitialLoading] =
-    useState(true);
-  const [isLoading, setIsLoading] = useState(false);
-  const [transactions] = useState<Transaction[]>([]);
   const [isFiltersModalOpen, setIsFiltersModalOpen] =
     useState(false);
   const [filters, setFilters] =
     useState<TransactionsFilters>({
-      bankAccountId: null,
+      month: new Date().getMonth(),
       year: new Date().getFullYear(),
+      bankAccountId: null,
+      type: null,
     });
 
-  useEffect(() => {
-    const timeout = setTimeout(
-      () => setInitialLoading(false),
-      2000,
-    );
+  const { transactions, isLoading, isRefetching } =
+    useTransactions(filters);
 
-    return () => clearTimeout(timeout);
-  }, []);
-
-  function handleApplyFilters(
-    newFilters: TransactionsFilters,
+  function updateFilters(
+    newFilters: Partial<TransactionsFilters>,
   ) {
-    setFilters(newFilters);
-    // TODO: refazer a busca das transações na API usando esses filtros
+    setFilters((prev) => ({ ...prev, ...newFilters }));
   }
 
   return {
     sliderState,
     setSliderState,
-    initialLoading,
-    isLoading,
-    setIsLoading,
+    initialLoading: isLoading,
+    isLoading: isRefetching,
     transactions,
     isFiltersModalOpen,
     setIsFiltersModalOpen,
     filters,
-    handleApplyFilters,
+    updateFilters,
   };
 }

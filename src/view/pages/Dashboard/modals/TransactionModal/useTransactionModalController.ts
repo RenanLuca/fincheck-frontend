@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import {
+  transactionSchema,
+  type TransactionSchema,
+} from "../../../../../app/schemas/transaction";
 import { useBankAccounts, BANK_ACCOUNTS_QUERY_KEY } from "../../../../../app/hooks/useBankAccounts";
 import { useCategories } from "../../../../../app/hooks/useCategories";
+import { TRANSACTIONS_QUERY_KEY } from "../../../../../app/hooks/useTransactions";
 import { TransactionsService } from "../../../../../app/services/transactionsService";
 
 interface UseTransactionModalControllerParams {
@@ -14,18 +20,21 @@ export function useTransactionModalController({
   type,
   onSuccess,
 }: UseTransactionModalControllerParams) {
-  const [name, setName] = useState("");
-  const [value, setValue] = useState<number | undefined>(
-    undefined,
-  );
-  const [categoryId, setCategoryId] = useState("");
-  const [bankAccountId, setBankAccountId] = useState("");
-  const [date, setDate] = useState<Date | undefined>(
-    new Date(),
-  );
+  const {
+    register,
+    control,
+    reset,
+    handleSubmit: hookFormHandleSubmit,
+    formState: { errors },
+  } = useForm<TransactionSchema>({
+    resolver: zodResolver(transactionSchema),
+    defaultValues: {
+      date: new Date(),
+    },
+  });
 
-  const { data: allCategories = [] } = useCategories();
-  const { data: accounts = [] } = useBankAccounts();
+  const { categories: allCategories } = useCategories();
+  const { accounts } = useBankAccounts();
 
   const categories = allCategories.filter(
     (category) => category.type === type,
@@ -38,56 +47,47 @@ export function useTransactionModalController({
       mutationFn: TransactionsService.create,
     });
 
-  const isSaveButtonDisabled =
-    !name || !value || !bankAccountId || !date;
+  const handleSubmit = hookFormHandleSubmit(
+    async (data) => {
+      try {
+        await createTransaction({
+          name: data.name,
+          value: data.value,
+          date: data.date.toISOString(),
+          type,
+          bankAccountId: data.bankAccountId,
+          categoryId: data.categoryId || undefined,
+        });
 
-  async function handleSubmit() {
-    if (!value || !date) {
-      return;
-    }
-
-    try {
-      await createTransaction({
-        name,
-        value,
-        date: date.toISOString(),
-        type,
-        bankAccountId,
-        categoryId: categoryId || undefined,
-      });
-
-      queryClient.invalidateQueries({
-        queryKey: BANK_ACCOUNTS_QUERY_KEY,
-      });
-      toast.success(
-        type === "EXPENSE"
-          ? "Despesa criada com sucesso!"
-          : "Receita criada com sucesso!",
-      );
-      onSuccess();
-    } catch {
-      toast.error(
-        type === "EXPENSE"
-          ? "Não foi possível criar a despesa!"
-          : "Não foi possível criar a receita!",
-      );
-    }
-  }
+        queryClient.invalidateQueries({
+          queryKey: BANK_ACCOUNTS_QUERY_KEY,
+        });
+        queryClient.invalidateQueries({
+          queryKey: TRANSACTIONS_QUERY_KEY,
+        });
+        toast.success(
+          type === "EXPENSE"
+            ? "Despesa criada com sucesso!"
+            : "Receita criada com sucesso!",
+        );
+        onSuccess();
+        reset();
+      } catch {
+        toast.error(
+          type === "EXPENSE"
+            ? "Não foi possível criar a despesa!"
+            : "Não foi possível criar a receita!",
+        );
+      }
+    },
+  );
 
   return {
-    name,
-    setName,
-    value,
-    setValue,
-    categoryId,
-    setCategoryId,
-    bankAccountId,
-    setBankAccountId,
-    date,
-    setDate,
+    register,
+    control,
+    errors,
     categories,
     accounts,
-    isSaveButtonDisabled,
     isLoading,
     handleSubmit,
   };

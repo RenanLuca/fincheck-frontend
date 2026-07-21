@@ -1,18 +1,17 @@
 import { useState } from "react";
-import { ACCOUNTS } from "../../../../../../app/config/accounts";
-
-export interface TransactionsFilters {
-  bankAccountId: string | null;
-  year: number;
-}
+import { useBankAccounts } from "../../../../../../app/hooks/useBankAccounts";
+import type { TransactionsFilters } from "../../../../../../app/entities/Transaction";
 
 interface UseTransactionsFiltersControllerParams {
-  onApplyFilters: (filters: TransactionsFilters) => void;
+  onApplyFilters: (
+    filters: Partial<TransactionsFilters>,
+  ) => void;
 }
 
 export function useTransactionsFiltersController({
   onApplyFilters,
 }: UseTransactionsFiltersControllerParams) {
+  const { accounts } = useBankAccounts();
   const [selectedAccountId, setSelectedAccountId] =
     useState<string | null>(null);
   const [year, setYear] = useState(() =>
@@ -41,7 +40,7 @@ export function useTransactionsFiltersController({
   }
 
   return {
-    accounts: ACCOUNTS,
+    accounts,
     selectedAccountId,
     selectAccount,
     year,

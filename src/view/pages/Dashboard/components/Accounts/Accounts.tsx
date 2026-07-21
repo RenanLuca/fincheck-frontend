@@ -15,6 +15,7 @@ export function Accounts() {
   const {
     sliderState,
     setSliderState,
+    initialLoading,
     isLoading,
     accounts,
     currentBalance,
@@ -28,7 +29,7 @@ export function Accounts() {
 
   return (
     <div className="bg-teal-900 rounded-2xl w-full justify-between h-full flex flex-col px-4 py-8 md:p-10">
-      {isLoading ? (
+      {initialLoading ? (
         <div className="flex-1 flex items-center justify-center">
           <Spinner className="text-white" />
         </div>
@@ -58,7 +59,11 @@ export function Accounts() {
             </div>
           </div>
 
-          {accounts.length === 0 ? (
+          {isLoading ? (
+            <div className="flex-1 flex items-center justify-center">
+              <Spinner className="text-white" />
+            </div>
+          ) : accounts.length === 0 ? (
             <div className="flex flex-col mt-10 md:mt-0">
               <strong className="text-white text-lg block mb-4">
                 Minhas Contas

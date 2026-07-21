@@ -7,7 +7,7 @@ export function useAccountsController() {
     isEnd: false,
   });
 
-  const { data: accounts = [], isLoading } = useBankAccounts();
+  const { accounts, isLoading, isRefetching } = useBankAccounts();
 
   const currentBalance = useMemo(
     () =>
@@ -21,7 +21,8 @@ export function useAccountsController() {
   return {
     sliderState,
     setSliderState,
-    isLoading,
+    initialLoading: isLoading,
+    isLoading: isRefetching,
     accounts,
     currentBalance,
   };
