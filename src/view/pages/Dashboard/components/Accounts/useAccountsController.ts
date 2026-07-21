@@ -1,32 +1,29 @@
-import { useEffect, useState } from "react";
-import type { iconsMap } from "../../../../components/icons/BankAccountTypeIcon/iconsMap";
-
-interface Account {
-  id: string;
-  name: string;
-  balance: number;
-  color: string;
-  type: keyof typeof iconsMap;
-}
+import { useMemo, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { BankAccountService } from "../../../../../app/services/bankAccountService";
 
 export function useAccountsController() {
   const [sliderState, setSliderState] = useState({
     isBeginning: true,
     isEnd: false,
   });
-  const [isLoading, setIsLoading] = useState(true);
-  const [accounts] = useState<Account[]>([]);
 
-  useEffect(() => {
-    const timeout = setTimeout(() => setIsLoading(false), 2000);
+  const { data: accounts = [], isLoading } = useQuery({
+    queryKey: ["bank-accounts"],
+    queryFn: BankAccountService.findAll,
+  });
 
-    return () => clearTimeout(timeout);
-  }, []);
+  const currentBalance = useMemo(
+    () =>
+      accounts.reduce((total, account) => total + account.currentBalance, 0),
+    [accounts],
+  );
 
   return {
     sliderState,
     setSliderState,
     isLoading,
     accounts,
+    currentBalance,
   };
 }

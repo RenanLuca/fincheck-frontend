@@ -8,14 +8,22 @@ interface AccountCardProps {
   name: string;
   balance: number;
   type: keyof typeof iconsMap;
+  onClick?: () => void;
 }
 
-export function AccountCard({ color, name, balance, type }: AccountCardProps) {
+export function AccountCard({
+  color,
+  name,
+  balance,
+  type,
+  onClick,
+}: AccountCardProps) {
   const { areValuesVisible } = useDashboard();
 
   return (
-    <div
-      className="p-4 bg-white rounded-2xl h-50 flex flex-col justify-between border-b-4 border-teal-950"
+    <button
+      onClick={onClick}
+      className="p-4 bg-white rounded-2xl h-50 flex w-full cursor-pointer flex-col justify-between border-b-4 border-teal-950 text-left"
       style={{ borderColor: color }}
     >
       <div>
@@ -33,6 +41,6 @@ export function AccountCard({ color, name, balance, type }: AccountCardProps) {
         </span>
         <small className="text-gray-600 text-sm">Saldo Atual</small>
       </div>
-    </div>
+    </button>
   );
 }

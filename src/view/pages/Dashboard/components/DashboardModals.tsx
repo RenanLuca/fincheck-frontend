@@ -1,22 +1,24 @@
 import { useDashboard } from "./DashboardContext/useDashboard";
-import { NewAccountModal } from "./NewAccountModal/NewAccountModal";
-import { TransactionModal } from "./TransactionModal/TransactionModal";
+import { AccountModal } from "../modals/AccountModal";
+import { TransactionModal } from "../modals/TransactionModal/TransactionModal";
 
 export function DashboardModals() {
   const {
-    isNewAccountModalOpen,
-    closeNewAccountModal,
+    accountModalState,
+    closeAccountModal,
     transactionModalType,
     closeTransactionModal,
   } = useDashboard();
 
   return (
     <>
-      <NewAccountModal
-        open={isNewAccountModalOpen}
+      <AccountModal
+        key={accountModalState.account?.id ?? "new"}
+        open={accountModalState.open}
+        account={accountModalState.account}
         onOpenChange={(open) => {
           if (!open) {
-            closeNewAccountModal();
+            closeAccountModal();
           }
         }}
       />

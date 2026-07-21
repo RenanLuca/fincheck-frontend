@@ -2,6 +2,7 @@ import * as RadixSelect from "@radix-ui/react-select";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import { useId } from "react";
 import { cn } from "../../../app/utils/cn";
+import { useHasMounted } from "../../../app/hooks/useHasMounted";
 
 interface SelectOption {
   value: string;
@@ -17,17 +18,18 @@ interface SelectProps {
 
 export function Select({ label, value, onValueChange, options }: SelectProps) {
   const id = useId();
+  const hasMounted = useHasMounted();
 
   return (
     <div className="relative">
       <RadixSelect.Root value={value} onValueChange={onValueChange}>
         <RadixSelect.Trigger
           id={id}
-          className="peer relative flex h-15 w-full cursor-pointer items-center rounded-lg border border-gray-500 bg-white px-4 pt-4 text-left text-gray-800 outline-none transition-colors data-[state=open]:border-gray-800"
+          className="peer relative flex h-13 w-full cursor-pointer items-center rounded-lg border border-gray-500 bg-white px-3.5 pt-3.5 text-left text-gray-800 outline-none transition-colors data-[state=open]:border-gray-800"
         >
           <RadixSelect.Value placeholder=" " />
-          <RadixSelect.Icon className="absolute right-4 top-1/2 -translate-y-1/2">
-            <ChevronDownIcon className="h-4 w-4 text-gray-800" />
+          <RadixSelect.Icon className="absolute right-3.5 top-1/2 -translate-y-1/2">
+            <ChevronDownIcon className="h-3.5 w-3.5 text-gray-800" />
           </RadixSelect.Icon>
         </RadixSelect.Trigger>
 
@@ -55,8 +57,9 @@ export function Select({ label, value, onValueChange, options }: SelectProps) {
       <label
         htmlFor={id}
         className={cn(
-          "pointer-events-none text-sm absolute left-4 top-1/2 -translate-y-1/2 text-gray-700 transition-all peer-data-[state=open]:top-3 peer-data-[state=open]:translate-y-0 peer-data-[state=open]:text-xs",
-          value && "top-3 translate-y-0 text-xs",
+          "pointer-events-none text-sm absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-700 peer-data-[state=open]:top-2.5 peer-data-[state=open]:translate-y-0 peer-data-[state=open]:text-xs",
+          hasMounted && "transition-all",
+          value && "top-2.5 translate-y-0 text-xs",
         )}
       >
         {label}

@@ -13,7 +13,7 @@ import { useDashboard } from "./DashboardContext/useDashboard";
 
 export function Fab() {
   const [isOpen, setIsOpen] = useState(false);
-  const { openNewAccountModal, openTransactionModal } = useDashboard();
+  const { openAccountModal, openTransactionModal } = useDashboard();
 
   const options = [
     {
@@ -26,7 +26,11 @@ export function Fab() {
       Icon: Income,
       onClick: () => openTransactionModal("INCOME"),
     },
-    { label: "Nova Conta", Icon: BankAccountIcon, onClick: openNewAccountModal },
+    {
+      label: "Nova Conta",
+      Icon: BankAccountIcon,
+      onClick: () => openAccountModal(),
+    },
   ];
 
   return (

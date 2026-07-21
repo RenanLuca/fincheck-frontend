@@ -3,6 +3,7 @@ import { format } from "date-fns";
 import { Popover, PopoverContent, PopoverTrigger } from "./Popover";
 import { Calendar } from "./Calendar";
 import { cn } from "../../../app/utils/cn";
+import { useHasMounted } from "../../../app/hooks/useHasMounted";
 
 interface DateInputProps {
   value: Date | undefined;
@@ -12,6 +13,7 @@ interface DateInputProps {
 export function DateInput({ value, onValueChange }: DateInputProps) {
   const id = useId();
   const [isOpen, setIsOpen] = useState(false);
+  const hasMounted = useHasMounted();
 
   return (
     <div className="relative">
@@ -19,7 +21,7 @@ export function DateInput({ value, onValueChange }: DateInputProps) {
         <PopoverTrigger asChild>
           <button
             id={id}
-            className="flex h-15 w-full cursor-pointer items-center rounded-lg border border-gray-500 bg-white px-4 pt-4 text-left text-gray-800 outline-none transition-colors data-[state=open]:border-gray-800"
+            className="flex h-13 w-full cursor-pointer items-center rounded-lg border border-gray-500 bg-white px-3.5 pt-3.5 text-left text-gray-800 outline-none transition-colors data-[state=open]:border-gray-800"
           >
             {value ? format(value, "dd/MM/yyyy") : ""}
           </button>
@@ -40,8 +42,9 @@ export function DateInput({ value, onValueChange }: DateInputProps) {
       <label
         htmlFor={id}
         className={cn(
-          "pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 transition-all",
-          value && "top-3 translate-y-0 text-xs",
+          "pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-600",
+          hasMounted && "transition-all",
+          value && "top-2.5 translate-y-0 text-xs",
         )}
       >
         Data

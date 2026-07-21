@@ -1,13 +1,19 @@
 import { createContext, useState, type ReactNode } from "react";
+import type { BankAccount } from "../../../../../app/entities/BankAccount";
 
 type TransactionType = "INCOME" | "EXPENSE";
+
+interface AccountModalState {
+  open: boolean;
+  account: BankAccount | null;
+}
 
 interface DashboardContextValues {
   areValuesVisible: boolean;
   toggleValuesVisibility: () => void;
-  isNewAccountModalOpen: boolean;
-  openNewAccountModal: () => void;
-  closeNewAccountModal: () => void;
+  accountModalState: AccountModalState;
+  openAccountModal: (account?: BankAccount) => void;
+  closeAccountModal: () => void;
   transactionModalType: TransactionType | null;
   openTransactionModal: (type: TransactionType) => void;
   closeTransactionModal: () => void;
@@ -21,7 +27,8 @@ interface DashboardProviderProps {
 
 export function DashboardProvider({ children }: DashboardProviderProps) {
   const [areValuesVisible, setAreValuesVisible] = useState(true);
-  const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState(false);
+  const [accountModalState, setAccountModalState] =
+    useState<AccountModalState>({ open: false, account: null });
   const [transactionModalType, setTransactionModalType] =
     useState<TransactionType | null>(null);
 
@@ -29,12 +36,12 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
     setAreValuesVisible((prev) => !prev);
   }
 
-  function openNewAccountModal() {
-    setIsNewAccountModalOpen(true);
+  function openAccountModal(account?: BankAccount) {
+    setAccountModalState({ open: true, account: account ?? null });
   }
 
-  function closeNewAccountModal() {
-    setIsNewAccountModalOpen(false);
+  function closeAccountModal() {
+    setAccountModalState((prev) => ({ ...prev, open: false }));
   }
 
   function openTransactionModal(type: TransactionType) {
@@ -50,9 +57,9 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
       value={{
         areValuesVisible,
         toggleValuesVisibility,
-        isNewAccountModalOpen,
-        openNewAccountModal,
-        closeNewAccountModal,
+        accountModalState,
+        openAccountModal,
+        closeAccountModal,
         transactionModalType,
         openTransactionModal,
         closeTransactionModal,

@@ -1,6 +1,7 @@
 import { forwardRef, useId, type ComponentProps } from "react";
 import { CrossCircledIcon } from "@radix-ui/react-icons";
 import { cn } from "../../../app/utils/cn";
+import { useHasMounted } from "../../../app/hooks/useHasMounted";
 
 interface InputProps extends ComponentProps<"input"> {
   label: string;
@@ -11,6 +12,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ id, label, error, className, ...props }, ref) => {
     const reactId = useId();
     const inputId = id ?? reactId;
+    const hasMounted = useHasMounted();
 
     return (
       <div>
@@ -21,7 +23,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             id={inputId}
             placeholder=" "
             className={cn(
-              "peer h-15 w-full rounded-lg border bg-white px-4 pt-4 text-gray-800 outline-none transition-colors focus:border-gray-800",
+              "peer h-13 w-full rounded-lg border bg-white px-3.5 pt-3.5 text-gray-800 outline-none transition-colors focus:border-gray-800",
               error ? "border-red-500!" : "border-gray-500",
               className,
             )}
@@ -29,7 +31,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
           <label
             htmlFor={inputId}
-            className="pointer-events-none text-sm absolute left-4 top-1/2 -translate-y-1/2 text-gray-700 transition-all peer-focus:top-3 peer-focus:translate-y-0 peer-focus:text-xs peer-not-placeholder-shown:top-3 peer-not-placeholder-shown:translate-y-0 peer-not-placeholder-shown:text-xs"
+            className={cn(
+              "pointer-events-none text-sm absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-700 peer-focus:top-2.5 peer-focus:translate-y-0 peer-focus:text-xs peer-not-placeholder-shown:top-2.5 peer-not-placeholder-shown:translate-y-0 peer-not-placeholder-shown:text-xs",
+              hasMounted && "transition-all",
+            )}
           >
             {label}
           </label>

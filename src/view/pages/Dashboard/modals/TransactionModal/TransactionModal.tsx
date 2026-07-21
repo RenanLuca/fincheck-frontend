@@ -1,9 +1,9 @@
-import { NumericFormat } from "react-number-format";
 import { Modal } from "../../../../components/ui/Modal";
 import { Input } from "../../../../components/ui/Input";
 import { Button } from "../../../../components/ui/Button";
 import { Select } from "../../../../components/ui/Select";
 import { DateInput } from "../../../../components/ui/DateInput";
+import { CurrencyInput } from "../../../../components/ui/CurrencyInput";
 import { useTransactionModalController } from "./useTransactionModalController";
 
 interface TransactionModalProps {
@@ -41,16 +41,9 @@ export function TransactionModal({
 
   return (
     <Modal open={open} onOpenChange={onOpenChange} title={title}>
-      <NumericFormat
+      <CurrencyInput
         value={value}
-        onValueChange={(values) => setValue(values.floatValue)}
-        thousandSeparator="."
-        decimalSeparator=","
-        decimalScale={2}
-        fixedDecimalScale
-        prefix="R$ "
-        placeholder="R$ 0,00"
-        className="w-full border-none bg-transparent text-center text-3xl font-bold text-gray-800 outline-none"
+        onValueChange={(newValue) => setValue(newValue)}
       />
 
       <div className="mt-8 flex flex-col gap-4">

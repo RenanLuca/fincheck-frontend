@@ -12,10 +12,15 @@ import { useDashboard } from "../DashboardContext/useDashboard";
 import { Spinner } from "../../../../components/ui/Spinner";
 
 export function Accounts() {
-  const { sliderState, setSliderState, isLoading, accounts } =
-    useAccountsController();
+  const {
+    sliderState,
+    setSliderState,
+    isLoading,
+    accounts,
+    currentBalance,
+  } = useAccountsController();
   const windowWidth = useWindowWidth();
-  const { areValuesVisible, toggleValuesVisibility, openNewAccountModal } =
+  const { areValuesVisible, toggleValuesVisibility, openAccountModal } =
     useDashboard();
 
   return (
@@ -27,15 +32,18 @@ export function Accounts() {
       ) : (
         <>
           <div>
-            <span className="text-white block">Saldo Total</span>
+            <span className="text-white block">
+              Saldo Total
+            </span>
             <div className="flex items-center gap-2">
               <strong
                 className={cn(
                   "text-2xl tracking-[-1px] text-white",
-                  !areValuesVisible && "blur-sm select-none",
+                  !areValuesVisible &&
+                    "blur-sm select-none",
                 )}
               >
-                {formatCurrency(100000)}
+                {formatCurrency(currentBalance)}
               </strong>
 
               <button
@@ -53,7 +61,7 @@ export function Accounts() {
                 Minhas Contas
               </strong>
               <button
-                onClick={openNewAccountModal}
+                onClick={() => openAccountModal()}
                 className="h-50 flex w-full cursor-pointer items-center justify-center rounded-2xl border border-dashed border-white/90"
               >
                 <div className="flex flex-col items-center gap-4">
@@ -73,7 +81,9 @@ export function Accounts() {
               <div>
                 <Swiper
                   spaceBetween={16}
-                  slidesPerView={windowWidth <= 500 ? 1 : 2.2}
+                  slidesPerView={
+                    windowWidth <= 500 ? 1 : 2.2
+                  }
                   onSwiper={(swiper) =>
                     setSliderState({
                       isBeginning: swiper.isBeginning,
@@ -103,10 +113,11 @@ export function Accounts() {
                   {accounts.map((account) => (
                     <SwiperSlide key={account.id}>
                       <AccountCard
-                        balance={account.balance}
+                        balance={account.currentBalance}
                         color={account.color}
                         name={account.name}
                         type={account.type}
+                        onClick={() => openAccountModal(account)}
                       />
                     </SwiperSlide>
                   ))}
