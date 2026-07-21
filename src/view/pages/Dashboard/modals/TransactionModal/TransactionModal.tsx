@@ -99,6 +99,7 @@ export function TransactionModal({
             <Controller
               name="categoryId"
               control={control}
+              defaultValue=""
               render={({ field }) => (
                 <Select
                   label="Categoria"
@@ -115,6 +116,7 @@ export function TransactionModal({
             <Controller
               name="bankAccountId"
               control={control}
+              defaultValue=""
               render={({ field }) => (
                 <Select
                   label={accountLabel}

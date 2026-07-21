@@ -2,9 +2,7 @@ import { LoaderCircle } from "lucide-react";
 import type { ComponentProps } from "react";
 import { cn } from "../../../app/utils/cn";
 
-interface SpinnerProps extends ComponentProps<
-  typeof LoaderCircle
-> {}
+type SpinnerProps = ComponentProps<typeof LoaderCircle>;
 
 export function Spinner({
   className,

@@ -7,10 +7,10 @@ import { DashboardModals } from "./components/DashboardModals";
 export function Dashboard() {
   return (
     <DashboardProvider>
-      <div className="w-full md:w-1/2">
+      <div className="w-full md:w-1/2 min-h-0">
         <Accounts />
       </div>
-      <div className="w-full md:w-1/2">
+      <div className="w-full md:w-1/2 min-h-0">
         <Transactions />
       </div>
       <Fab />

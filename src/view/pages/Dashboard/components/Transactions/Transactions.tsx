@@ -9,6 +9,7 @@ import { TransactionItem } from "./TransactionItem";
 import { TransactionsFiltersModal } from "./FilterModal/TransactionsFiltersModal";
 import { Spinner } from "../../../../components/ui/Spinner";
 import { useDashboard } from "../DashboardContext/useDashboard";
+import { useInfiniteScrollTrigger } from "../../../../../app/hooks/useInfiniteScrollTrigger";
 import emptyStateImg from "../../../../../assets/empty-state.svg";
 
 export function Transactions() {
@@ -18,12 +19,20 @@ export function Transactions() {
     initialLoading,
     isLoading,
     transactions,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
     isFiltersModalOpen,
     setIsFiltersModalOpen,
     filters,
     updateFilters,
   } = useTransactionsController();
   const { openTransactionModal } = useDashboard();
+
+  const { rootRef, targetRef } = useInfiniteScrollTrigger({
+    onIntersect: fetchNextPage,
+    enabled: hasNextPage && !isFetchingNextPage,
+  });
 
   return (
     <div className="bg-gray-100 rounded-2xl w-full h-full p-10 flex flex-col">
@@ -104,7 +113,10 @@ export function Transactions() {
               </p>
             </div>
           ) : (
-            <div className="mt-4 space-y-2 flex-1 overflow-y-auto">
+            <div
+              ref={rootRef}
+              className="mt-4 space-y-2 flex-1 overflow-y-auto"
+            >
               {transactions.map((transaction) => (
                 <TransactionItem
                   key={transaction.id}
@@ -118,6 +130,15 @@ export function Transactions() {
                   }
                 />
               ))}
+
+              {hasNextPage && (
+                <div
+                  ref={targetRef}
+                  className="flex items-center justify-center py-4"
+                >
+                  <Spinner className="h-5 w-5 text-gray-800" />
+                </div>
+              )}
             </div>
           )}
 

@@ -4,6 +4,10 @@ import type {
   TransactionsFilters,
 } from "../../entities/Transaction";
 
+interface FindAllParams extends TransactionsFilters {
+  page: number;
+}
+
 interface FindAllResponse {
   data: Transaction[];
   meta: {
@@ -19,7 +23,8 @@ export async function findAll({
   year,
   bankAccountId,
   type,
-}: TransactionsFilters) {
+  page,
+}: FindAllParams) {
   const { data } = await httpClient.get<FindAllResponse>(
     "/transactions",
     {
@@ -28,6 +33,7 @@ export async function findAll({
         year,
         bankAccountId: bankAccountId ?? undefined,
         type: type ?? undefined,
+        page,
       },
     },
   );

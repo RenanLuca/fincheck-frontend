@@ -17,8 +17,14 @@ export function useTransactionsController() {
       type: null,
     });
 
-  const { transactions, isLoading, isRefetching } =
-    useTransactions(filters);
+  const {
+    transactions,
+    isPending,
+    isFetching,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useTransactions(filters);
 
   function updateFilters(
     newFilters: Partial<TransactionsFilters>,
@@ -29,9 +35,12 @@ export function useTransactionsController() {
   return {
     sliderState,
     setSliderState,
-    initialLoading: isLoading,
-    isLoading: isRefetching,
+    initialLoading: isPending,
+    isLoading: isFetching && !isFetchingNextPage,
     transactions,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
     isFiltersModalOpen,
     setIsFiltersModalOpen,
     filters,

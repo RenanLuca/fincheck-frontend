@@ -11,7 +11,7 @@ export function App() {
         <Router />
         <Toaster />
       </AuthProvider>
-      {/* <ReactQueryDevtools /> */}
+      <ReactQueryDevtools />
     </QueryClientProvider>
   );
 }
