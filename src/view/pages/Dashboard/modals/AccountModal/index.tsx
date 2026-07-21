@@ -41,7 +41,7 @@ export function AccountModal({
     isDeleting,
   } = useAccountModalController({
     account,
-    onSuccess: () => onOpenChange(false),
+    onClose: () => onOpenChange(false),
   });
 
   return (

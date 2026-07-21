@@ -1,4 +1,4 @@
-import { ChevronDownIcon } from "@radix-ui/react-icons";
+import { ChevronDown } from "lucide-react";
 import { TransactionsIcon } from "../../../../components/icons/TransactionsIcon";
 import { IncomeIcon } from "../../../../components/icons/IncomeIcon";
 import { ExpensesIcon } from "../../../../components/icons/ExpensesIcon";
@@ -42,7 +42,7 @@ export function TransactionsTypeDropdown({
           <span className="text-sm text-gray-800 font-medium ">
             {selected.label}
           </span>
-          <ChevronDownIcon className="text-gray-900" />
+          <ChevronDown className="h-4 w-4 text-gray-900" />
         </button>
       </DropdownMenuTrigger>
 

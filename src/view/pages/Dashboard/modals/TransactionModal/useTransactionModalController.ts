@@ -22,13 +22,13 @@ import type { Transaction } from "../../../../../app/entities/Transaction";
 interface UseTransactionModalControllerParams {
   type?: "INCOME" | "EXPENSE";
   transaction?: Transaction | null;
-  onSuccess: () => void;
+  onClose: () => void;
 }
 
 export function useTransactionModalController({
   type,
   transaction,
-  onSuccess,
+  onClose,
 }: UseTransactionModalControllerParams) {
   const isEditing = !!transaction;
   const resolvedType = transaction?.type ?? type ?? "EXPENSE";
@@ -96,7 +96,7 @@ export function useTransactionModalController({
 
   function cancelDeleteConfirmation() {
     setIsConfirmingDelete(false);
-    onSuccess();
+    onClose();
   }
 
   async function handleConfirmDelete() {
@@ -114,7 +114,7 @@ export function useTransactionModalController({
       });
       toast.success("Transação excluída com sucesso!");
       setIsConfirmingDelete(false);
-      onSuccess();
+      onClose();
     } catch {
       toast.error("Não foi possível excluir a transação!");
     }
@@ -156,7 +156,7 @@ export function useTransactionModalController({
         queryClient.invalidateQueries({
           queryKey: TRANSACTIONS_QUERY_KEY,
         });
-        onSuccess();
+        onClose();
         reset();
       } catch {
         toast.error(

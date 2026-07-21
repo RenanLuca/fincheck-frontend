@@ -1,7 +1,4 @@
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-} from "@radix-ui/react-icons";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Modal } from "../../../../../components/ui/Modal";
 import { Button } from "../../../../../components/ui/Button";
 import { cn } from "../../../../../../app/utils/cn";
@@ -73,7 +70,7 @@ export function TransactionsFiltersModal({
               onClick={goToPreviousYear}
               className="cursor-pointer rounded-full p-2 transition-colors hover:bg-gray-100"
             >
-              <ChevronLeftIcon className="h-5 w-5 text-gray-900" />
+              <ChevronLeft className="h-5 w-5 text-gray-900" />
             </button>
             <span className="text-sm font-medium text-gray-800">
               {year}
@@ -82,7 +79,7 @@ export function TransactionsFiltersModal({
               onClick={goToNextYear}
               className="cursor-pointer rounded-full p-2 transition-colors hover:bg-gray-100"
             >
-              <ChevronRightIcon className="h-5 w-5 text-gray-900" />
+              <ChevronRight className="h-5 w-5 text-gray-900" />
             </button>
           </div>
         </div>

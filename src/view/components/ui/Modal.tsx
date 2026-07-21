@@ -1,5 +1,5 @@
 import * as RadixDialog from "@radix-ui/react-dialog";
-import { Cross2Icon } from "@radix-ui/react-icons";
+import { X } from "lucide-react";
 import type { ReactNode } from "react";
 import { cn } from "../../../app/utils/cn";
 
@@ -37,7 +37,7 @@ export function Modal({
           <header className="grid grid-cols-[1fr_auto_1fr] items-center">
             <RadixDialog.Close asChild>
               <button className="justify-self-start cursor-pointer outline-none">
-                <Cross2Icon className="w-5 h-5 text-gray-800" />
+                <X className="w-5 h-5 text-gray-800" />
               </button>
             </RadixDialog.Close>
 

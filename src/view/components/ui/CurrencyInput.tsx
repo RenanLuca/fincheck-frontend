@@ -2,7 +2,7 @@ import {
   NumericFormat,
   type NumericFormatProps,
 } from "react-number-format";
-import { CrossCircledIcon } from "@radix-ui/react-icons";
+import { CircleX } from "lucide-react";
 import { cn } from "../../../app/utils/cn";
 
 interface CurrencyInputProps extends Omit<
@@ -43,7 +43,7 @@ export function CurrencyInput({
 
       {error && (
         <div className="flex justify-center items-end gap-2 mt-1 text-red-600">
-          <CrossCircledIcon />
+          <CircleX className="h-3.5 w-3.5" />
           <p className="text-xs">{error}</p>
         </div>
       )}

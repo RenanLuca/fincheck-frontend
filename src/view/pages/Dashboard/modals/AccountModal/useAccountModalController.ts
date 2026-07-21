@@ -16,12 +16,12 @@ import type { BankAccount } from "../../../../../app/entities/BankAccount";
 
 interface UseAccountModalControllerParams {
   account?: BankAccount | null;
-  onSuccess: () => void;
+  onClose: () => void;
 }
 
 export function useAccountModalController({
   account,
-  onSuccess,
+  onClose,
 }: UseAccountModalControllerParams) {
   const isEditing = !!account;
 
@@ -71,7 +71,7 @@ export function useAccountModalController({
 
   function cancelDeleteConfirmation() {
     setIsConfirmingDelete(false);
-    onSuccess();
+    onClose();
   }
 
   async function handleConfirmDelete() {
@@ -84,7 +84,7 @@ export function useAccountModalController({
       queryClient.invalidateQueries({ queryKey: BANK_ACCOUNTS_QUERY_KEY });
       toast.success("Conta excluída com sucesso!");
       setIsConfirmingDelete(false);
-      onSuccess();
+      onClose();
     } catch {
       toast.error("Não foi possível excluir a conta!");
     }
@@ -104,7 +104,7 @@ export function useAccountModalController({
         queryClient.invalidateQueries({
           queryKey: BANK_ACCOUNTS_QUERY_KEY,
         });
-        onSuccess();
+        onClose();
         reset();
       } catch {
         toast.error(

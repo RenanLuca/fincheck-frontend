@@ -1,8 +1,5 @@
 import { useId } from "react";
-import {
-  ChevronDownIcon,
-  CrossCircledIcon,
-} from "@radix-ui/react-icons";
+import { ChevronDown, CircleX } from "lucide-react";
 import * as RadixDropdownMenu from "@radix-ui/react-dropdown-menu";
 import {
   DropdownMenu,
@@ -48,7 +45,7 @@ export function AccountColorInput({
                   color={selectedColor.color}
                 />
               ) : (
-                <ChevronDownIcon className="text-gray-800 w-3.5 h-3.5" />
+                <ChevronDown className="text-gray-800 w-3.5 h-3.5" />
               )}
             </button>
           </DropdownMenuTrigger>
@@ -81,7 +78,7 @@ export function AccountColorInput({
 
       {error && (
         <div className="flex justify-start items-end gap-2 mt-1 text-red-600">
-          <CrossCircledIcon />
+          <CircleX className="h-3.5 w-3.5" />
           <p className="text-xs">{error}</p>
         </div>
       )}

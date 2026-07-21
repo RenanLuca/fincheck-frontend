@@ -1,4 +1,4 @@
-import { ExitIcon } from "@radix-ui/react-icons";
+import { LogOut } from "lucide-react";
 import { useAuth } from "../../../app/hooks/useAuth";
 import {
   DropdownMenu,
@@ -25,7 +25,7 @@ export function UserMenu() {
           onSelect={signOut}
           className="gap-2"
         >
-          <ExitIcon className="w-4 h-4" />
+          <LogOut className="w-4 h-4" />
           Sair
         </DropdownMenuItem>
       </DropdownMenuContent>

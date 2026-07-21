@@ -1,8 +1,5 @@
 import { useState } from "react";
-import {
-  Cross2Icon,
-  PlusIcon,
-} from "@radix-ui/react-icons";
+import { X, Plus } from "lucide-react";
 import { Expense } from "../../../components/icons/categories/expense/Expense";
 import { Income } from "../../../components/icons/categories/income/Income";
 import { BankAccountIcon } from "../../../components/icons/BankAccountIcon";
@@ -43,9 +40,9 @@ export function Fab() {
         <DropdownMenuTrigger asChild>
           <button className="w-14 h-14 rounded-full bg-teal-900 flex items-center justify-center cursor-pointer transition-colors hover:bg-teal-800">
             {isOpen ? (
-              <Cross2Icon className="text-white w-6 h-6" />
+              <X className="text-white w-6 h-6" />
             ) : (
-              <PlusIcon className="text-white w-6 h-6" />
+              <Plus className="text-white w-6 h-6" />
             )}
           </button>
         </DropdownMenuTrigger>

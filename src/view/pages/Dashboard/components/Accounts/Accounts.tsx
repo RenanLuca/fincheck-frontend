@@ -1,4 +1,4 @@
-import { PlusIcon } from "@radix-ui/react-icons";
+import { Plus } from "lucide-react";
 import { EyeIcon } from "../../../../components/icons/EyeIcon";
 import { AccountCard } from "./AccountCard";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -74,7 +74,7 @@ export function Accounts() {
               >
                 <div className="flex flex-col items-center gap-4">
                   <div className="w-12 h-12 rounded-full border border-dashed border-white flex items-center justify-center">
-                    <PlusIcon className="text-white w-6 h-6" />
+                    <Plus className="text-white w-6 h-6" />
                   </div>
                   <span className="text-white font-medium text-center">
                     Cadastre uma

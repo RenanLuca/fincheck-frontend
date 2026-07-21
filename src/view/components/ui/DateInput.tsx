@@ -1,6 +1,6 @@
 import { useId, useState } from "react";
 import { format } from "date-fns";
-import { CrossCircledIcon } from "@radix-ui/react-icons";
+import { CircleX } from "lucide-react";
 import {
   Popover,
   PopoverContent,
@@ -67,7 +67,7 @@ export function DateInput({
 
       {error && (
         <div className="flex justify-start items-end gap-2 mt-1 text-red-600">
-          <CrossCircledIcon />
+          <CircleX className="h-3.5 w-3.5" />
           <p className="text-xs">{error}</p>
         </div>
       )}

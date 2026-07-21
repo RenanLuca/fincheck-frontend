@@ -41,7 +41,7 @@ export function TransactionModal({
   } = useTransactionModalController({
     type,
     transaction,
-    onSuccess: () => onOpenChange(false),
+    onClose: () => onOpenChange(false),
   });
 
   const isExpense = resolvedType === "EXPENSE";

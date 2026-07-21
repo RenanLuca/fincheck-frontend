@@ -1,8 +1,5 @@
 import * as RadixSelect from "@radix-ui/react-select";
-import {
-  ChevronDownIcon,
-  CrossCircledIcon,
-} from "@radix-ui/react-icons";
+import { ChevronDown, CircleX } from "lucide-react";
 import { useId } from "react";
 import { cn } from "../../../app/utils/cn";
 import { useHasMounted } from "../../../app/hooks/useHasMounted";
@@ -46,7 +43,7 @@ export function Select({
           >
             <RadixSelect.Value placeholder=" " />
             <RadixSelect.Icon className="absolute right-3.5 top-1/2 -translate-y-1/2">
-              <ChevronDownIcon className="h-3.5 w-3.5 text-gray-800" />
+              <ChevronDown className="h-3.5 w-3.5 text-gray-800" />
             </RadixSelect.Icon>
           </RadixSelect.Trigger>
 
@@ -87,7 +84,7 @@ export function Select({
 
       {error && (
         <div className="flex justify-start items-end gap-2 mt-1 text-red-600">
-          <CrossCircledIcon />
+          <CircleX className="h-3.5 w-3.5" />
           <p className="text-xs">{error}</p>
         </div>
       )}

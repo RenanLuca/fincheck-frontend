@@ -3,10 +3,7 @@ import {
   type DayPickerProps,
 } from "react-day-picker";
 import { ptBR } from "date-fns/locale";
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-} from "@radix-ui/react-icons";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export function Calendar(props: DayPickerProps) {
   return (
@@ -16,9 +13,9 @@ export function Calendar(props: DayPickerProps) {
       components={{
         Chevron: ({ orientation }) =>
           orientation === "left" ? (
-            <ChevronLeftIcon className="h-4 w-4" />
+            <ChevronLeft className="h-4 w-4" />
           ) : (
-            <ChevronRightIcon className="h-4 w-4" />
+            <ChevronRight className="h-4 w-4" />
           ),
       }}
       classNames={{

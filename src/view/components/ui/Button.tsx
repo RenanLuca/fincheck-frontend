@@ -1,5 +1,5 @@
 import type { ComponentProps } from "react";
-import { ReloadIcon } from "@radix-ui/react-icons";
+import { LoaderCircle } from "lucide-react";
 import { cn } from "../../../app/utils/cn";
 
 interface ButtonProps extends ComponentProps<"button"> {
@@ -23,7 +23,7 @@ export function Button({
       )}
     >
       {isLoading ? (
-        <ReloadIcon className="h-5 w-5 animate-spin" />
+        <LoaderCircle className="h-5 w-5 animate-spin" />
       ) : (
         children
       )}
