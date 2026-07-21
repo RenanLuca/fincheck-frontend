@@ -5,11 +5,15 @@ interface CategoryIconProps {
   category?: string;
 }
 
-export function CategoryIcon({ type, category }: CategoryIconProps) {
+export function CategoryIcon({
+  type,
+  category,
+}: CategoryIconProps) {
   const Icon =
     iconsMap[type][
-      (category as keyof (typeof iconsMap.expense | typeof iconsMap.income)) ??
-        "default"
+      (category as keyof (
+        typeof iconsMap.expense | typeof iconsMap.income
+      )) ?? "default"
     ] ?? iconsMap[type].default;
 
   return <Icon />;

@@ -7,7 +7,14 @@ export function Expense() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect x="1" y="1" width="42" height="42" rx="21" fill="#FFF5F5" />
+      <rect
+        x="1"
+        y="1"
+        width="42"
+        height="42"
+        rx="21"
+        fill="#FFF5F5"
+      />
       <path
         d="M23.2591 28.3475H16.4218C14.5341 28.3475 13.36 27.0156 13.36 25.1307V18.0282C13.36 16.1432 14.5341 14.8113 16.4209 14.8113H27.5791C29.4602 14.8113 30.64 16.1432 30.64 18.0282V19.9467"
         stroke="#C92A2A"

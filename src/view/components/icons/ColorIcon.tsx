@@ -12,7 +12,14 @@ export function ColorIcon({ color, bg }: ColorIconProps) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect x="1.3335" y="0.5" width="33" height="33" rx="16.5" fill={bg} />
+      <rect
+        x="1.3335"
+        y="0.5"
+        width="33"
+        height="33"
+        rx="16.5"
+        fill={bg}
+      />
       <path
         fillRule="evenodd"
         clipRule="evenodd"

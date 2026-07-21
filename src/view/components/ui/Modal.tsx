@@ -21,7 +21,10 @@ export function Modal({
   children,
 }: ModalProps) {
   return (
-    <RadixDialog.Root open={open} onOpenChange={onOpenChange}>
+    <RadixDialog.Root
+      open={open}
+      onOpenChange={onOpenChange}
+    >
       <RadixDialog.Portal>
         <RadixDialog.Overlay className="fixed inset-0 bg-black/50 data-[state=open]:animate-overlay-show data-[state=closed]:animate-overlay-hide z-50" />
 
@@ -43,7 +46,9 @@ export function Modal({
             </RadixDialog.Title>
 
             {rightAction && (
-              <div className="justify-self-end">{rightAction}</div>
+              <div className="justify-self-end">
+                {rightAction}
+              </div>
             )}
           </header>
 

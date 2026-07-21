@@ -19,7 +19,8 @@
 @theme {
   --font-sans: "Inter Variable", sans-serif;
 
-  --animate-dropdown-show: dropdown-show 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-dropdown-show: dropdown-show 150ms
+    cubic-bezier(0.16, 1, 0.3, 1);
   --animate-dropdown-hide: dropdown-hide 150ms ease-in;
   --animate-overlay-show: overlay-show 150ms ease-out;
   --animate-overlay-hide: overlay-hide 150ms ease-in;

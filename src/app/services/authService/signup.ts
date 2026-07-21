@@ -10,12 +10,19 @@ interface RegisterResponse {
   accessToken: string;
 }
 
-export async function signup({ name, email, password }: RegisterParams) {
-  const { data } = await httpClient.post<RegisterResponse>("/auth/signup", {
-    name,
-    email,
-    password,
-  });
+export async function signup({
+  name,
+  email,
+  password,
+}: RegisterParams) {
+  const { data } = await httpClient.post<RegisterResponse>(
+    "/auth/signup",
+    {
+      name,
+      email,
+      password,
+    },
+  );
 
   return data;
 }

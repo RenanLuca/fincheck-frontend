@@ -4,7 +4,8 @@ import { Input } from "../../components/ui/Input";
 import { useLoginController } from "./useLoginController";
 
 export function Login() {
-  const { register, errors, handleSubmit, isLoading } = useLoginController();
+  const { register, errors, handleSubmit, isLoading } =
+    useLoginController();
 
   return (
     <AuthCard
@@ -13,7 +14,10 @@ export function Login() {
       linkText="Crie uma conta"
       linkTo="/register"
     >
-      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+      <form
+        className="flex flex-col gap-4"
+        onSubmit={handleSubmit}
+      >
         <Input
           type="email"
           label="E-mail"

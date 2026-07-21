@@ -24,14 +24,21 @@ export function useRegisterController() {
     mutationFn: AuthService.signup,
   });
 
-  const handleSubmit = hookFormHandleSubmit(async (data) => {
-    try {
-      const { accessToken } = await mutateAsync(data);
-      signIn(accessToken);
-    } catch {
-      toast.error("Não foi possível criar a sua conta!");
-    }
-  });
+  const handleSubmit = hookFormHandleSubmit(
+    async (data) => {
+      try {
+        const { accessToken } = await mutateAsync(data);
+        signIn(accessToken);
+      } catch {
+        toast.error("Não foi possível criar a sua conta!");
+      }
+    },
+  );
 
-  return { register, errors, handleSubmit, isLoading: isPending };
+  return {
+    register,
+    errors,
+    handleSubmit,
+    isLoading: isPending,
+  };
 }

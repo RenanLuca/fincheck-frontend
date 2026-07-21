@@ -36,11 +36,19 @@ export function TransactionModal({
 
   const isExpense = type === "EXPENSE";
   const title = isExpense ? "Nova Despesa" : "Nova Receita";
-  const nameLabel = isExpense ? "Nome da Despesa" : "Nome da Receita";
-  const accountLabel = isExpense ? "Pagar com" : "Receber na conta";
+  const nameLabel = isExpense
+    ? "Nome da Despesa"
+    : "Nome da Receita";
+  const accountLabel = isExpense
+    ? "Pagar com"
+    : "Receber na conta";
 
   return (
-    <Modal open={open} onOpenChange={onOpenChange} title={title}>
+    <Modal
+      open={open}
+      onOpenChange={onOpenChange}
+      title={title}
+    >
       <CurrencyInput
         value={value}
         onValueChange={(newValue) => setValue(newValue)}
@@ -75,7 +83,10 @@ export function TransactionModal({
 
         <DateInput value={date} onValueChange={setDate} />
 
-        <Button onClick={handleSubmit} disabled={isSaveButtonDisabled}>
+        <Button
+          onClick={handleSubmit}
+          disabled={isSaveButtonDisabled}
+        >
           Salvar
         </Button>
       </div>

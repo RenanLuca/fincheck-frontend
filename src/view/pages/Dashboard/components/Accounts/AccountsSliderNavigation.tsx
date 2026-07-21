@@ -1,4 +1,7 @@
-import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from "@radix-ui/react-icons";
 import { useSwiper } from "swiper/react";
 
 interface AccountsSliderNavigationProps {

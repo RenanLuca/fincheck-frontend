@@ -33,23 +33,34 @@ export function AccountColorInput({
           >
             Cor
             {selectedColor ? (
-              <ColorIcon bg={selectedColor.bg} color={selectedColor.color} />
+              <ColorIcon
+                bg={selectedColor.bg}
+                color={selectedColor.color}
+              />
             ) : (
               <ChevronDownIcon className="text-gray-800 w-3.5 h-3.5" />
             )}
           </button>
         </DropdownMenuTrigger>
 
-        <DropdownMenuContent align="center" className="w-64 p-3 z-99">
+        <DropdownMenuContent
+          align="center"
+          className="w-64 p-3 z-99"
+        >
           <div className="grid grid-cols-4 gap-2">
             {ACCOUNT_COLORS.map((accountColor) => (
               <RadixDropdownMenu.Item
                 key={accountColor.color}
                 asChild
-                onSelect={() => onValueChange(accountColor.color)}
+                onSelect={() =>
+                  onValueChange(accountColor.color)
+                }
               >
                 <button className="flex cursor-pointer items-center justify-center rounded-full outline-none transition-transform hover:scale-110">
-                  <ColorIcon bg={accountColor.bg} color={accountColor.color} />
+                  <ColorIcon
+                    bg={accountColor.bg}
+                    color={accountColor.color}
+                  />
                 </button>
               </RadixDropdownMenu.Item>
             ))}

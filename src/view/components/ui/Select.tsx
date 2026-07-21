@@ -16,13 +16,21 @@ interface SelectProps {
   options: SelectOption[];
 }
 
-export function Select({ label, value, onValueChange, options }: SelectProps) {
+export function Select({
+  label,
+  value,
+  onValueChange,
+  options,
+}: SelectProps) {
   const id = useId();
   const hasMounted = useHasMounted();
 
   return (
     <div className="relative">
-      <RadixSelect.Root value={value} onValueChange={onValueChange}>
+      <RadixSelect.Root
+        value={value}
+        onValueChange={onValueChange}
+      >
         <RadixSelect.Trigger
           id={id}
           className="peer relative flex h-13 w-full cursor-pointer items-center rounded-lg border border-gray-500 bg-white px-3.5 pt-3.5 text-left text-gray-800 outline-none transition-colors data-[state=open]:border-gray-800"
@@ -46,7 +54,9 @@ export function Select({ label, value, onValueChange, options }: SelectProps) {
                   value={option.value}
                   className="flex cursor-pointer select-none items-center justify-between rounded-lg px-3 py-2 text-sm font-medium text-gray-800 outline-none data-highlighted:bg-gray-100 "
                 >
-                  <RadixSelect.ItemText>{option.label}</RadixSelect.ItemText>
+                  <RadixSelect.ItemText>
+                    {option.label}
+                  </RadixSelect.ItemText>
                 </RadixSelect.Item>
               ))}
             </RadixSelect.Viewport>

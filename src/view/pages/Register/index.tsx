@@ -4,7 +4,8 @@ import { Input } from "../../components/ui/Input";
 import { useRegisterController } from "./useRegisterController";
 
 export function Register() {
-  const { register, errors, handleSubmit, isLoading } = useRegisterController();
+  const { register, errors, handleSubmit, isLoading } =
+    useRegisterController();
 
   return (
     <AuthCard
@@ -13,7 +14,10 @@ export function Register() {
       linkText="Fazer Login"
       linkTo="/login"
     >
-      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+      <form
+        className="flex flex-col gap-4"
+        onSubmit={handleSubmit}
+      >
         <Input
           type="text"
           label="Nome"

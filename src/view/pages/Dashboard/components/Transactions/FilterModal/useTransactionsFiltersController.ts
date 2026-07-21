@@ -13,13 +13,16 @@ interface UseTransactionsFiltersControllerParams {
 export function useTransactionsFiltersController({
   onApplyFilters,
 }: UseTransactionsFiltersControllerParams) {
-  const [selectedAccountId, setSelectedAccountId] = useState<string | null>(
-    null,
+  const [selectedAccountId, setSelectedAccountId] =
+    useState<string | null>(null);
+  const [year, setYear] = useState(() =>
+    new Date().getFullYear(),
   );
-  const [year, setYear] = useState(() => new Date().getFullYear());
 
   function selectAccount(accountId: string) {
-    setSelectedAccountId((prev) => (prev === accountId ? null : accountId));
+    setSelectedAccountId((prev) =>
+      prev === accountId ? null : accountId,
+    );
   }
 
   function goToPreviousYear() {
@@ -31,7 +34,10 @@ export function useTransactionsFiltersController({
   }
 
   function handleApplyFilters() {
-    onApplyFilters({ bankAccountId: selectedAccountId, year });
+    onApplyFilters({
+      bankAccountId: selectedAccountId,
+      year,
+    });
   }
 
   return {

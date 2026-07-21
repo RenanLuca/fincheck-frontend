@@ -84,7 +84,11 @@ export function Transactions() {
             </div>
           ) : transactions.length === 0 ? (
             <div className="flex-1 flex flex-col items-center justify-center gap-4">
-              <img src={emptyStateImg} alt="" className="w-40" />
+              <img
+                src={emptyStateImg}
+                alt=""
+                className="w-40"
+              />
               <p className="text-gray-700 font-medium text-center">
                 Não encontramos nenhuma transação!
               </p>

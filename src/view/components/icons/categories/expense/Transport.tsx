@@ -7,7 +7,14 @@ export function Transport() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect x="1" y="1" width="42" height="42" rx="21" fill="#FFF9DB" />
+      <rect
+        x="1"
+        y="1"
+        width="42"
+        height="42"
+        rx="21"
+        fill="#FFF9DB"
+      />
       <path
         d="M25.1556 23.5562H26.881"
         stroke="#FCC419"

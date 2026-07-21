@@ -1,4 +1,9 @@
-import { createContext, useEffect, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from "react";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { LocalStorageKeys } from "../config/localStorageKeys";
@@ -18,19 +23,27 @@ interface AuthContextValue {
   signOut: () => void;
 }
 
-export const AuthContext = createContext({} as AuthContextValue);
+export const AuthContext = createContext(
+  {} as AuthContextValue,
+);
 
 interface AuthProviderProps {
   children: ReactNode;
 }
 
-export function AuthProvider({ children }: AuthProviderProps) {
+export function AuthProvider({
+  children,
+}: AuthProviderProps) {
   const [hasToken, setHasToken] = useState(
-    () => !!localStorage.getItem(LocalStorageKeys.ACCESS_TOKEN),
+    () =>
+      !!localStorage.getItem(LocalStorageKeys.ACCESS_TOKEN),
   );
 
   function signIn(accessToken: string) {
-    localStorage.setItem(LocalStorageKeys.ACCESS_TOKEN, accessToken);
+    localStorage.setItem(
+      LocalStorageKeys.ACCESS_TOKEN,
+      accessToken,
+    );
     setHasToken(true);
   }
 
@@ -54,9 +67,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
   useEffect(() => {
     if (isError) {
       signOut();
-      toast.error("Sua sessão expirou. Faça login novamente.", {
-        id: "session-expired",
-      });
+      toast.error(
+        "Sua sessão expirou. Faça login novamente.",
+        {
+          id: "session-expired",
+        },
+      );
     }
   }, [isError]);
 
@@ -68,7 +84,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   return (
     <AuthContext.Provider
-      value={{ signedIn, user, isLoadingUser, signIn, signOut }}
+      value={{
+        signedIn,
+        user,
+        isLoadingUser,
+        signIn,
+        signOut,
+      }}
     >
       {children}
     </AuthContext.Provider>

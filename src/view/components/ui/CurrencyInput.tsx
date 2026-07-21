@@ -1,4 +1,7 @@
-import { NumericFormat, type NumericFormatProps } from "react-number-format";
+import {
+  NumericFormat,
+  type NumericFormatProps,
+} from "react-number-format";
 import { cn } from "../../../app/utils/cn";
 
 interface CurrencyInputProps extends Omit<
@@ -18,7 +21,9 @@ export function CurrencyInput({
   return (
     <NumericFormat
       value={value}
-      onValueChange={(values) => onValueChange(values.floatValue)}
+      onValueChange={(values) =>
+        onValueChange(values.floatValue)
+      }
       thousandSeparator="."
       decimalSeparator=","
       decimalScale={2}

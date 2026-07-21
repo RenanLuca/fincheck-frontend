@@ -19,7 +19,9 @@ export function AuthCard({
   return (
     <div className="flex flex-col gap-8">
       <div className="flex flex-col items-center gap-2 text-center">
-        <h1 className="text-2xl font-bold text-gray-800">{title}</h1>
+        <h1 className="text-2xl font-bold text-gray-800">
+          {title}
+        </h1>
         <p className="text-gray-800">
           {subtitle}{" "}
           <Link

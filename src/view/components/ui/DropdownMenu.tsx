@@ -3,7 +3,8 @@ import type { ComponentProps } from "react";
 import { cn } from "../../../app/utils/cn";
 
 export const DropdownMenu = RadixDropdownMenu.Root;
-export const DropdownMenuTrigger = RadixDropdownMenu.Trigger;
+export const DropdownMenuTrigger =
+  RadixDropdownMenu.Trigger;
 
 export function DropdownMenuContent({
   className,

@@ -28,14 +28,21 @@ export function useLoginController() {
     mutationFn: AuthService.signin,
   });
 
-  const handleSubmit = hookFormHandleSubmit(async (data) => {
-    try {
-      const { accessToken } = await mutateAsync(data);
-      signIn(accessToken);
-    } catch {
-      toast.error("Credenciais inválidas!");
-    }
-  });
+  const handleSubmit = hookFormHandleSubmit(
+    async (data) => {
+      try {
+        const { accessToken } = await mutateAsync(data);
+        signIn(accessToken);
+      } catch {
+        toast.error("Credenciais inválidas!");
+      }
+    },
+  );
 
-  return { register, errors, handleSubmit, isLoading: isPending };
+  return {
+    register,
+    errors,
+    handleSubmit,
+    isLoading: isPending,
+  };
 }

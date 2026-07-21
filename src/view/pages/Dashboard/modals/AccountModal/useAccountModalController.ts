@@ -1,5 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import {
@@ -40,35 +43,45 @@ export function useAccountModalController({
 
   const queryClient = useQueryClient();
 
-  const { mutateAsync: createAccount, isPending: isCreating } = useMutation({
+  const {
+    mutateAsync: createAccount,
+    isPending: isCreating,
+  } = useMutation({
     mutationFn: BankAccountService.create,
   });
 
-  const { mutateAsync: updateAccount, isPending: isUpdating } = useMutation({
+  const {
+    mutateAsync: updateAccount,
+    isPending: isUpdating,
+  } = useMutation({
     mutationFn: BankAccountService.update,
   });
 
-  const handleSubmit = hookFormHandleSubmit(async (data) => {
-    try {
-      if (isEditing) {
-        await updateAccount({ id: account.id, ...data });
-        toast.success("Conta editada com sucesso!");
-      } else {
-        await createAccount(data);
-        toast.success("Conta criada com sucesso!");
-      }
+  const handleSubmit = hookFormHandleSubmit(
+    async (data) => {
+      try {
+        if (isEditing) {
+          await updateAccount({ id: account.id, ...data });
+          toast.success("Conta editada com sucesso!");
+        } else {
+          await createAccount(data);
+          toast.success("Conta criada com sucesso!");
+        }
 
-      queryClient.invalidateQueries({ queryKey: ["bank-accounts"] });
-      onSuccess();
-      reset();
-    } catch {
-      toast.error(
-        isEditing
-          ? "Não foi possível editar a conta!"
-          : "Não foi possível criar a conta!",
-      );
-    }
-  });
+        queryClient.invalidateQueries({
+          queryKey: ["bank-accounts"],
+        });
+        onSuccess();
+        reset();
+      } catch {
+        toast.error(
+          isEditing
+            ? "Não foi possível editar a conta!"
+            : "Não foi possível criar a conta!",
+        );
+      }
+    },
+  );
 
   return {
     register,

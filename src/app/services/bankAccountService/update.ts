@@ -16,12 +16,15 @@ export async function update({
   color,
   type,
 }: UpdateBankAccountParams) {
-  const { data } = await httpClient.put(`/bank-accounts/${id}`, {
-    name,
-    initialBalance,
-    type,
-    color,
-  });
+  const { data } = await httpClient.put(
+    `/bank-accounts/${id}`,
+    {
+      name,
+      initialBalance,
+      type,
+      color,
+    },
+  );
 
   return data;
 }

@@ -15,7 +15,9 @@ export function TransactionsTypeDropdown() {
       <DropdownMenuTrigger asChild className="select-none">
         <button className="flex items-center gap-2 cursor-pointer outline-none">
           <TransactionsIcon />
-          <span className="text-sm text-gray-800 font-medium ">Transações</span>
+          <span className="text-sm text-gray-800 font-medium ">
+            Transações
+          </span>
           <ChevronDownIcon className="text-gray-900" />
         </button>
       </DropdownMenuTrigger>

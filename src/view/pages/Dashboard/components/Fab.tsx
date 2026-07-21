@@ -1,5 +1,8 @@
 import { useState } from "react";
-import { Cross2Icon, PlusIcon } from "@radix-ui/react-icons";
+import {
+  Cross2Icon,
+  PlusIcon,
+} from "@radix-ui/react-icons";
 import { Expense } from "../../../components/icons/categories/expense/Expense";
 import { Income } from "../../../components/icons/categories/income/Income";
 import { BankAccountIcon } from "../../../components/icons/BankAccountIcon";
@@ -13,7 +16,8 @@ import { useDashboard } from "./DashboardContext/useDashboard";
 
 export function Fab() {
   const [isOpen, setIsOpen] = useState(false);
-  const { openAccountModal, openTransactionModal } = useDashboard();
+  const { openAccountModal, openTransactionModal } =
+    useDashboard();
 
   const options = [
     {
@@ -46,9 +50,17 @@ export function Fab() {
           </button>
         </DropdownMenuTrigger>
 
-        <DropdownMenuContent side="top" align="end" className="w-56">
+        <DropdownMenuContent
+          side="top"
+          align="end"
+          className="w-56"
+        >
           {options.map(({ label, Icon, onClick }) => (
-            <DropdownMenuItem key={label} className="gap-3" onSelect={onClick}>
+            <DropdownMenuItem
+              key={label}
+              className="gap-3"
+              onSelect={onClick}
+            >
               <Icon />
               {label}
             </DropdownMenuItem>

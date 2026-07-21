@@ -28,7 +28,9 @@ export function AccountCard({
     >
       <div>
         <BankAccountTypeIcon type={type} />
-        <span className="text-gray-800 font-medium mt-4 block">{name}</span>
+        <span className="text-gray-800 font-medium mt-4 block">
+          {name}
+        </span>
       </div>
       <div>
         <span
@@ -39,7 +41,9 @@ export function AccountCard({
         >
           {formatCurrency(balance)}
         </span>
-        <small className="text-gray-600 text-sm">Saldo Atual</small>
+        <small className="text-gray-600 text-sm">
+          Saldo Atual
+        </small>
       </div>
     </button>
   );

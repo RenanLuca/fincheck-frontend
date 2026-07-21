@@ -21,7 +21,10 @@ export function UserMenu() {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>
-        <DropdownMenuItem onSelect={signOut} className="gap-2">
+        <DropdownMenuItem
+          onSelect={signOut}
+          className="gap-2"
+        >
           <ExitIcon className="w-4 h-4" />
           Sair
         </DropdownMenuItem>

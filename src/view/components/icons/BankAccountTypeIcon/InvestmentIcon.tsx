@@ -7,7 +7,14 @@ export function InvestmentIcon() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect x="1" y="1" width="42" height="42" rx="21" fill="#E9ECEF" />
+      <rect
+        x="1"
+        y="1"
+        width="42"
+        height="42"
+        rx="21"
+        fill="#E9ECEF"
+      />
       <path
         d="M15.52 30.2735V28.3535"
         stroke="#495057"

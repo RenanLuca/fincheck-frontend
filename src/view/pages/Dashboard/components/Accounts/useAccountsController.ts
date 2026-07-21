@@ -15,7 +15,10 @@ export function useAccountsController() {
 
   const currentBalance = useMemo(
     () =>
-      accounts.reduce((total, account) => total + account.currentBalance, 0),
+      accounts.reduce(
+        (total, account) => total + account.currentBalance,
+        0,
+      ),
     [accounts],
   );
 

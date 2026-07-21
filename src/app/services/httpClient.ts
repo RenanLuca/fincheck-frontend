@@ -6,14 +6,18 @@ export const httpClient = axios.create({
 });
 
 httpClient.interceptors.request.use(async (config) => {
-  const accessToken = localStorage.getItem(LocalStorageKeys.ACCESS_TOKEN);
+  const accessToken = localStorage.getItem(
+    LocalStorageKeys.ACCESS_TOKEN,
+  );
 
   if (accessToken) {
     config.headers.Authorization = `Bearer ${accessToken}`;
   }
 
   if (import.meta.env.DEV) {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    await new Promise((resolve) =>
+      setTimeout(resolve, 3000),
+    );
   }
 
   return config;

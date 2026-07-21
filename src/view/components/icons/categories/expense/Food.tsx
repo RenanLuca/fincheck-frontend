@@ -7,7 +7,14 @@ export function Food() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect x="1" y="1" width="42" height="42" rx="21" fill="#FFF5F5" />
+      <rect
+        x="1"
+        y="1"
+        width="42"
+        height="42"
+        rx="21"
+        fill="#FFF5F5"
+      />
       <path
         fillRule="evenodd"
         clipRule="evenodd"

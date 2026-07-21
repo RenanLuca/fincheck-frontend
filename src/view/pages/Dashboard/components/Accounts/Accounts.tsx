@@ -20,8 +20,11 @@ export function Accounts() {
     currentBalance,
   } = useAccountsController();
   const windowWidth = useWindowWidth();
-  const { areValuesVisible, toggleValuesVisibility, openAccountModal } =
-    useDashboard();
+  const {
+    areValuesVisible,
+    toggleValuesVisibility,
+    openAccountModal,
+  } = useDashboard();
 
   return (
     <div className="bg-teal-900 rounded-2xl w-full justify-between h-full flex flex-col px-4 py-8 md:p-10">
@@ -117,7 +120,9 @@ export function Accounts() {
                         color={account.color}
                         name={account.name}
                         type={account.type}
-                        onClick={() => openAccountModal(account)}
+                        onClick={() =>
+                          openAccountModal(account)
+                        }
                       />
                     </SwiperSlide>
                   ))}

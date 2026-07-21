@@ -25,11 +25,17 @@ export function AccountModal({
   onOpenChange,
   account,
 }: AccountModalProps) {
-  const { register, control, errors, handleSubmit, isLoading, isEditing } =
-    useAccountModalController({
-      account,
-      onSuccess: () => onOpenChange(false),
-    });
+  const {
+    register,
+    control,
+    errors,
+    handleSubmit,
+    isLoading,
+    isEditing,
+  } = useAccountModalController({
+    account,
+    onSuccess: () => onOpenChange(false),
+  });
 
   return (
     <Modal
@@ -37,7 +43,10 @@ export function AccountModal({
       onOpenChange={onOpenChange}
       title={isEditing ? "Editar Conta" : "Nova Conta"}
     >
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4"
+      >
         <div className="flex flex-col items-center gap-1">
           <Controller
             name="initialBalance"
@@ -49,7 +58,9 @@ export function AccountModal({
               />
             )}
           />
-          <span className="text-sm text-gray-600">Saldo</span>
+          <span className="text-sm text-gray-600">
+            Saldo
+          </span>
         </div>
 
         <Input

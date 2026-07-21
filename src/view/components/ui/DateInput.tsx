@@ -1,6 +1,10 @@
 import { useId, useState } from "react";
 import { format } from "date-fns";
-import { Popover, PopoverContent, PopoverTrigger } from "./Popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "./Popover";
 import { Calendar } from "./Calendar";
 import { cn } from "../../../app/utils/cn";
 import { useHasMounted } from "../../../app/hooks/useHasMounted";
@@ -10,7 +14,10 @@ interface DateInputProps {
   onValueChange: (date: Date | undefined) => void;
 }
 
-export function DateInput({ value, onValueChange }: DateInputProps) {
+export function DateInput({
+  value,
+  onValueChange,
+}: DateInputProps) {
   const id = useId();
   const [isOpen, setIsOpen] = useState(false);
   const hasMounted = useHasMounted();

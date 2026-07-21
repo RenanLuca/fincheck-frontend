@@ -26,7 +26,9 @@ export function TransactionItem({
           <strong className="font-bold tracking-[-0.5px] block">
             {name}
           </strong>
-          <span className="text-sm text-gray-600">{date}</span>
+          <span className="text-sm text-gray-600">
+            {date}
+          </span>
         </div>
       </div>
       <span

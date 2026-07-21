@@ -22,7 +22,11 @@ export function Button({
         className,
       )}
     >
-      {isLoading ? <ReloadIcon className="h-5 w-5 animate-spin" /> : children}
+      {isLoading ? (
+        <ReloadIcon className="h-5 w-5 animate-spin" />
+      ) : (
+        children
+      )}
     </button>
   );
 }

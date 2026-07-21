@@ -10,15 +10,22 @@ export function useTransactionModalController({
   type,
 }: UseTransactionModalControllerParams) {
   const [name, setName] = useState("");
-  const [value, setValue] = useState<number | undefined>(undefined);
+  const [value, setValue] = useState<number | undefined>(
+    undefined,
+  );
   const [categoryId, setCategoryId] = useState("");
   const [bankAccountId, setBankAccountId] = useState("");
-  const [date, setDate] = useState<Date | undefined>(new Date());
+  const [date, setDate] = useState<Date | undefined>(
+    new Date(),
+  );
 
-  const categories = CATEGORIES.filter((category) => category.type === type);
+  const categories = CATEGORIES.filter(
+    (category) => category.type === type,
+  );
   const accounts = ACCOUNTS;
 
-  const isSaveButtonDisabled = !name || !value || !bankAccountId || !date;
+  const isSaveButtonDisabled =
+    !name || !value || !bankAccountId || !date;
 
   function handleSubmit() {
     // TODO: enviar para a API (POST /transactions) quando integrarmos
